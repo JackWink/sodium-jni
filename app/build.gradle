@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
@@ -11,8 +11,15 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    sourceSets.main {
-        jniLibs.srcDir "../libs"
+    sourceSets {
+        main {
+            java {
+                srcDir 'src'
+            }
+            jniLibs {
+                srcDir '../libs'
+            }
+        }
     }
     buildTypes {
         release {
@@ -24,8 +31,4 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-}
-
-task jar(type: Jar) {
-    from android.sourceSets.main.java
 }
