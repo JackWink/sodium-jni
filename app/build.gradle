@@ -12,10 +12,7 @@ android {
         versionName "1.0"
     }
     sourceSets.main {
-        jniLibs.srcDir '../libs' 
-        java {
-            srcDir 'src/main/java'
-        }
+        jniLibs.srcDir "../libs"
     }
     buildTypes {
         release {
