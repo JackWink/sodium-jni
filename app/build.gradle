@@ -13,6 +13,9 @@ android {
     }
     sourceSets.main {
         jniLibs.srcDir 'libs' 
+        java {
+            srcDir 'src/main/java'
+        }
     }
     buildTypes {
         release {
@@ -24,4 +27,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+task jar(type: Jar) {
+    from android.sourceSets.main.java
 }
