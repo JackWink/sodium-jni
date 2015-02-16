@@ -41,7 +41,7 @@ mkdir -p $SODIUMJNI_SRC_ROOT/main/java/com/jackwink/libsodium
 export C_INCLUDE_PATH="${JAVA_HOME}/include:${JAVA_HOME}/include/linux:/System/Library/Frameworks/JavaVM.framework/Headers"
 
 rm -f *.c
-swig -java -package org.jackwink.sodium -outdir ../app/src/main/java/com/jackwink/libsodium sodium.i
+swig -java -package com.jackwink.libsodium -outdir ../app/src/main/java/com/jackwink/libsodium sodium.i
 
 ##
 #   Step 3
@@ -49,4 +49,4 @@ swig -java -package org.jackwink.sodium -outdir ../app/src/main/java/com/jackwin
 
 cd $LIBSODIUM_JNI_HOME
 ndk-build
-mv $SODIUMJNI_HOME/libs $SODIUMJNI_SRC_ROOT/libs
+mv $SODIUMJNI_HOME/libs $SODIUMJNI_SRC_ROOT/main/lib

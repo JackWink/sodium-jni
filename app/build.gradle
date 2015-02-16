@@ -10,13 +10,24 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     sourceSets {
         main {
             java {
-                srcDir 'src'
+                srcDir 'src/main/java'
+            }
+            resources {
+                srcDir 'src/main/lib'
+            }
+            jni {
+                srcDirs = []
+            }
+            jniLibs {
+                srcDir 'src/main/lib'
             }
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
