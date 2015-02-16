@@ -16,9 +16,6 @@ android {
             java {
                 srcDir 'src/main/java'
             }
-            resources {
-                srcDir 'src/main/lib'
-            }
             jni {
                 srcDirs = []
             }
