@@ -1,3 +1,4 @@
 *.java
 *.c
 *.so
+local.properties

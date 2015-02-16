@@ -15,7 +15,6 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 	ARCH_PREFIX := armv7-a
 else ifeq ($(TARGET_ARCH_ABI),armeabi)
@@ -28,7 +27,7 @@ else
 	ARCH_PREFIX := $(TARGET_ARCH)
 endif
 
-SODIUM_LIB_DIR := /installs/libsodium/libsodium-android-$(ARCH_PREFIX)/
+SODIUM_LIB_DIR := $(LOCAL_PATH)/libsodium/libsodium-android-$(ARCH_PREFIX)
 SODIUM_INC_DIR := $(SODIUM_LIB_DIR)/include
 SODIUM_LIB := $(SODIUM_LIB_DIR)/lib/libsodium.a
 
@@ -40,7 +39,7 @@ include $(PREBUILT_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := sodiumjni
-LOCAL_SRC_FILES := /installs/sodium-jni/jni/sodium_wrap.c 
+LOCAL_SRC_FILES := $(LOCAL_PATH)/sodium_wrap.c 
 LOCAL_CFLAGS   += -Wall -g -pedantic -std=c99
 
 LOCAL_STATIC_LIBRARIES := sodium 
