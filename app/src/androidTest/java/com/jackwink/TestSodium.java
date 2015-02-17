@@ -22,5 +22,13 @@ public class TestSodium extends TestCase {
         byte[] publicKey = new byte[SodiumConstants.CRYPTO_SIGN_PUBLICKEYBYTES];
         byte[] secretKey = new byte[SodiumConstants.CRYPTO_SIGN_SECRETKEYBYTES];
         cryptoProvider.crypto_sign_keypair(publicKey, secretKey);
+
+
+        byte[] original = "test".getBytes();
+        byte[] testSig = cryptoProvider.crypto_sign(original, secretKey);
+        byte[] message = cryptoProvider.crypto_sign_open(testSig, publicKey);
+        Log.d("sodiumjni", "Original: " + Arrays.toString(original));
+        Log.d("sodiumjni", "Signed: " + Arrays.toString(testSig));
+        Log.d("sodiumjni", "Opened: " + Arrays.toString(message));
     }
 }

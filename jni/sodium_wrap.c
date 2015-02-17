@@ -187,579 +187,6 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 #define SWIG_contract_assert(nullreturn, expr, msg) if (!(expr)) {SWIG_JavaThrowException(jenv, SWIG_JavaIllegalArgumentException, msg); return nullreturn; } else
 
 
-#include <stdint.h>		// Use the C99 official header
-
-
-#if defined(SWIG_NOINCLUDE) || defined(SWIG_NOARRAYS)
-
-
-static int SWIG_JavaArrayInSchar (JNIEnv *jenv, jbyte **jarr, signed char **carr, jbyteArray input);
-static void SWIG_JavaArrayArgoutSchar (JNIEnv *jenv, jbyte *jarr, signed char *carr, jbyteArray input);
-static jbyteArray SWIG_JavaArrayOutSchar (JNIEnv *jenv, signed char *result, jsize sz);
-
-
-static int SWIG_JavaArrayInUchar (JNIEnv *jenv, jshort **jarr, unsigned char **carr, jshortArray input);
-static void SWIG_JavaArrayArgoutUchar (JNIEnv *jenv, jshort *jarr, unsigned char *carr, jshortArray input);
-static jshortArray SWIG_JavaArrayOutUchar (JNIEnv *jenv, unsigned char *result, jsize sz);
-
-
-static int SWIG_JavaArrayInShort (JNIEnv *jenv, jshort **jarr, short **carr, jshortArray input);
-static void SWIG_JavaArrayArgoutShort (JNIEnv *jenv, jshort *jarr, short *carr, jshortArray input);
-static jshortArray SWIG_JavaArrayOutShort (JNIEnv *jenv, short *result, jsize sz);
-
-
-static int SWIG_JavaArrayInUshort (JNIEnv *jenv, jint **jarr, unsigned short **carr, jintArray input);
-static void SWIG_JavaArrayArgoutUshort (JNIEnv *jenv, jint *jarr, unsigned short *carr, jintArray input);
-static jintArray SWIG_JavaArrayOutUshort (JNIEnv *jenv, unsigned short *result, jsize sz);
-
-
-static int SWIG_JavaArrayInInt (JNIEnv *jenv, jint **jarr, int **carr, jintArray input);
-static void SWIG_JavaArrayArgoutInt (JNIEnv *jenv, jint *jarr, int *carr, jintArray input);
-static jintArray SWIG_JavaArrayOutInt (JNIEnv *jenv, int *result, jsize sz);
-
-
-static int SWIG_JavaArrayInUint (JNIEnv *jenv, jlong **jarr, unsigned int **carr, jlongArray input);
-static void SWIG_JavaArrayArgoutUint (JNIEnv *jenv, jlong *jarr, unsigned int *carr, jlongArray input);
-static jlongArray SWIG_JavaArrayOutUint (JNIEnv *jenv, unsigned int *result, jsize sz);
-
-
-static int SWIG_JavaArrayInLong (JNIEnv *jenv, jint **jarr, long **carr, jintArray input);
-static void SWIG_JavaArrayArgoutLong (JNIEnv *jenv, jint *jarr, long *carr, jintArray input);
-static jintArray SWIG_JavaArrayOutLong (JNIEnv *jenv, long *result, jsize sz);
-
-
-static int SWIG_JavaArrayInUlong (JNIEnv *jenv, jlong **jarr, unsigned long **carr, jlongArray input);
-static void SWIG_JavaArrayArgoutUlong (JNIEnv *jenv, jlong *jarr, unsigned long *carr, jlongArray input);
-static jlongArray SWIG_JavaArrayOutUlong (JNIEnv *jenv, unsigned long *result, jsize sz);
-
-
-static int SWIG_JavaArrayInLonglong (JNIEnv *jenv, jlong **jarr, jlong **carr, jlongArray input);
-static void SWIG_JavaArrayArgoutLonglong (JNIEnv *jenv, jlong *jarr, jlong *carr, jlongArray input);
-static jlongArray SWIG_JavaArrayOutLonglong (JNIEnv *jenv, jlong *result, jsize sz);
-
-
-static int SWIG_JavaArrayInFloat (JNIEnv *jenv, jfloat **jarr, float **carr, jfloatArray input);
-static void SWIG_JavaArrayArgoutFloat (JNIEnv *jenv, jfloat *jarr, float *carr, jfloatArray input);
-static jfloatArray SWIG_JavaArrayOutFloat (JNIEnv *jenv, float *result, jsize sz);
-
-
-static int SWIG_JavaArrayInDouble (JNIEnv *jenv, jdouble **jarr, double **carr, jdoubleArray input);
-static void SWIG_JavaArrayArgoutDouble (JNIEnv *jenv, jdouble *jarr, double *carr, jdoubleArray input);
-static jdoubleArray SWIG_JavaArrayOutDouble (JNIEnv *jenv, double *result, jsize sz);
-
-
-#else
-
-
-/* signed char[] support */
-static int SWIG_JavaArrayInSchar (JNIEnv *jenv, jbyte **jarr, signed char **carr, jbyteArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetByteArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (signed char*) calloc(sz, sizeof(signed char)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (signed char)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutSchar (JNIEnv *jenv, jbyte *jarr, signed char *carr, jbyteArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jbyte)carr[i];
-  (*jenv)->ReleaseByteArrayElements(jenv, input, jarr, 0);
-}
-
-static jbyteArray SWIG_JavaArrayOutSchar (JNIEnv *jenv, signed char *result, jsize sz) {
-  jbyte *arr;
-  int i;
-  jbyteArray jresult = (*jenv)->NewByteArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetByteArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jbyte)result[i];
-  (*jenv)->ReleaseByteArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* unsigned char[] support */
-static int SWIG_JavaArrayInUchar (JNIEnv *jenv, jshort **jarr, unsigned char **carr, jshortArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetShortArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (unsigned char*) calloc(sz, sizeof(unsigned char)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (unsigned char)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutUchar (JNIEnv *jenv, jshort *jarr, unsigned char *carr, jshortArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jshort)carr[i];
-  (*jenv)->ReleaseShortArrayElements(jenv, input, jarr, 0);
-}
-
-static jshortArray SWIG_JavaArrayOutUchar (JNIEnv *jenv, unsigned char *result, jsize sz) {
-  jshort *arr;
-  int i;
-  jshortArray jresult = (*jenv)->NewShortArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetShortArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jshort)result[i];
-  (*jenv)->ReleaseShortArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* short[] support */
-static int SWIG_JavaArrayInShort (JNIEnv *jenv, jshort **jarr, short **carr, jshortArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetShortArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (short*) calloc(sz, sizeof(short)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (short)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutShort (JNIEnv *jenv, jshort *jarr, short *carr, jshortArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jshort)carr[i];
-  (*jenv)->ReleaseShortArrayElements(jenv, input, jarr, 0);
-}
-
-static jshortArray SWIG_JavaArrayOutShort (JNIEnv *jenv, short *result, jsize sz) {
-  jshort *arr;
-  int i;
-  jshortArray jresult = (*jenv)->NewShortArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetShortArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jshort)result[i];
-  (*jenv)->ReleaseShortArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* unsigned short[] support */
-static int SWIG_JavaArrayInUshort (JNIEnv *jenv, jint **jarr, unsigned short **carr, jintArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetIntArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (unsigned short*) calloc(sz, sizeof(unsigned short)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (unsigned short)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutUshort (JNIEnv *jenv, jint *jarr, unsigned short *carr, jintArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jint)carr[i];
-  (*jenv)->ReleaseIntArrayElements(jenv, input, jarr, 0);
-}
-
-static jintArray SWIG_JavaArrayOutUshort (JNIEnv *jenv, unsigned short *result, jsize sz) {
-  jint *arr;
-  int i;
-  jintArray jresult = (*jenv)->NewIntArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetIntArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jint)result[i];
-  (*jenv)->ReleaseIntArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* int[] support */
-static int SWIG_JavaArrayInInt (JNIEnv *jenv, jint **jarr, int **carr, jintArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetIntArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (int*) calloc(sz, sizeof(int)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (int)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutInt (JNIEnv *jenv, jint *jarr, int *carr, jintArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jint)carr[i];
-  (*jenv)->ReleaseIntArrayElements(jenv, input, jarr, 0);
-}
-
-static jintArray SWIG_JavaArrayOutInt (JNIEnv *jenv, int *result, jsize sz) {
-  jint *arr;
-  int i;
-  jintArray jresult = (*jenv)->NewIntArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetIntArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jint)result[i];
-  (*jenv)->ReleaseIntArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* unsigned int[] support */
-static int SWIG_JavaArrayInUint (JNIEnv *jenv, jlong **jarr, unsigned int **carr, jlongArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetLongArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (unsigned int*) calloc(sz, sizeof(unsigned int)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (unsigned int)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutUint (JNIEnv *jenv, jlong *jarr, unsigned int *carr, jlongArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jlong)carr[i];
-  (*jenv)->ReleaseLongArrayElements(jenv, input, jarr, 0);
-}
-
-static jlongArray SWIG_JavaArrayOutUint (JNIEnv *jenv, unsigned int *result, jsize sz) {
-  jlong *arr;
-  int i;
-  jlongArray jresult = (*jenv)->NewLongArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetLongArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jlong)result[i];
-  (*jenv)->ReleaseLongArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* long[] support */
-static int SWIG_JavaArrayInLong (JNIEnv *jenv, jint **jarr, long **carr, jintArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetIntArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (long*) calloc(sz, sizeof(long)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (long)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutLong (JNIEnv *jenv, jint *jarr, long *carr, jintArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jint)carr[i];
-  (*jenv)->ReleaseIntArrayElements(jenv, input, jarr, 0);
-}
-
-static jintArray SWIG_JavaArrayOutLong (JNIEnv *jenv, long *result, jsize sz) {
-  jint *arr;
-  int i;
-  jintArray jresult = (*jenv)->NewIntArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetIntArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jint)result[i];
-  (*jenv)->ReleaseIntArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* unsigned long[] support */
-static int SWIG_JavaArrayInUlong (JNIEnv *jenv, jlong **jarr, unsigned long **carr, jlongArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetLongArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (unsigned long*) calloc(sz, sizeof(unsigned long)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (unsigned long)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutUlong (JNIEnv *jenv, jlong *jarr, unsigned long *carr, jlongArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jlong)carr[i];
-  (*jenv)->ReleaseLongArrayElements(jenv, input, jarr, 0);
-}
-
-static jlongArray SWIG_JavaArrayOutUlong (JNIEnv *jenv, unsigned long *result, jsize sz) {
-  jlong *arr;
-  int i;
-  jlongArray jresult = (*jenv)->NewLongArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetLongArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jlong)result[i];
-  (*jenv)->ReleaseLongArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* jlong[] support */
-static int SWIG_JavaArrayInLonglong (JNIEnv *jenv, jlong **jarr, jlong **carr, jlongArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetLongArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (jlong*) calloc(sz, sizeof(jlong)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (jlong)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutLonglong (JNIEnv *jenv, jlong *jarr, jlong *carr, jlongArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jlong)carr[i];
-  (*jenv)->ReleaseLongArrayElements(jenv, input, jarr, 0);
-}
-
-static jlongArray SWIG_JavaArrayOutLonglong (JNIEnv *jenv, jlong *result, jsize sz) {
-  jlong *arr;
-  int i;
-  jlongArray jresult = (*jenv)->NewLongArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetLongArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jlong)result[i];
-  (*jenv)->ReleaseLongArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* float[] support */
-static int SWIG_JavaArrayInFloat (JNIEnv *jenv, jfloat **jarr, float **carr, jfloatArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetFloatArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (float*) calloc(sz, sizeof(float)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (float)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutFloat (JNIEnv *jenv, jfloat *jarr, float *carr, jfloatArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jfloat)carr[i];
-  (*jenv)->ReleaseFloatArrayElements(jenv, input, jarr, 0);
-}
-
-static jfloatArray SWIG_JavaArrayOutFloat (JNIEnv *jenv, float *result, jsize sz) {
-  jfloat *arr;
-  int i;
-  jfloatArray jresult = (*jenv)->NewFloatArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetFloatArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jfloat)result[i];
-  (*jenv)->ReleaseFloatArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-/* double[] support */
-static int SWIG_JavaArrayInDouble (JNIEnv *jenv, jdouble **jarr, double **carr, jdoubleArray input) {
-  int i;
-  jsize sz;
-  if (!input) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
-    return 0;
-  }
-  sz = (*jenv)->GetArrayLength(jenv, input);
-  *jarr = (*jenv)->GetDoubleArrayElements(jenv, input, 0);
-  if (!*jarr)
-    return 0; 
-  *carr = (double*) calloc(sz, sizeof(double)); 
-  if (!*carr) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
-    return 0;
-  }
-  for (i=0; i<sz; i++)
-    (*carr)[i] = (double)(*jarr)[i];
-  return 1;
-}
-
-static void SWIG_JavaArrayArgoutDouble (JNIEnv *jenv, jdouble *jarr, double *carr, jdoubleArray input) {
-  int i;
-  jsize sz = (*jenv)->GetArrayLength(jenv, input);
-  for (i=0; i<sz; i++)
-    jarr[i] = (jdouble)carr[i];
-  (*jenv)->ReleaseDoubleArrayElements(jenv, input, jarr, 0);
-}
-
-static jdoubleArray SWIG_JavaArrayOutDouble (JNIEnv *jenv, double *result, jsize sz) {
-  jdouble *arr;
-  int i;
-  jdoubleArray jresult = (*jenv)->NewDoubleArray(jenv, sz);
-  if (!jresult)
-    return NULL;
-  arr = (*jenv)->GetDoubleArrayElements(jenv, jresult, 0);
-  if (!arr)
-    return NULL;
-  for (i=0; i<sz; i++)
-    arr[i] = (jdouble)result[i];
-  (*jenv)->ReleaseDoubleArrayElements(jenv, jresult, arr, 0);
-  return jresult;
-}
-
-
-#endif
-
-
 #include "sodium.h"
 
 
@@ -800,18 +227,18 @@ SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1
   (void)jenv;
   (void)jcls;
   {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
   }
   {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
+    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0); 
   }
   result = (int)crypto_sign_keypair(arg1,arg2);
   jresult = (jint)result; 
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
   }
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0); 
   }
   
   
@@ -819,129 +246,120 @@ SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1
 }
 
 
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jintArray jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5) {
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5) {
   jint jresult = 0 ;
   unsigned char *arg1 = (unsigned char *) 0 ;
   unsigned long long *arg2 = (unsigned long long *) 0 ;
   unsigned char *arg3 = (unsigned char *) 0 ;
   unsigned long long arg4 ;
   unsigned char *arg5 = (unsigned char *) 0 ;
-  jint *jarr2 ;
   int result;
   
   (void)jenv;
   (void)jcls;
   {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
   }
-  if (!SWIG_JavaArrayInLong(jenv, &jarr2, (long **)&arg2, jarg2)) return 0; 
+  arg2 = *(unsigned long long **)&jarg2; 
   {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
+    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0); 
   }
   arg4 = (unsigned long long)jarg4; 
   {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
+    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0); 
   }
   result = (int)crypto_sign(arg1,arg2,(unsigned char const *)arg3,arg4,(unsigned char const *)arg5);
   jresult = (jint)result; 
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  SWIG_JavaArrayArgoutLong(jenv, jarr2, (long *)arg2, jarg2); 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
   }
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0); 
   }
   
-  free(arg2); 
   
   
   return jresult;
 }
 
 
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1open(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jintArray jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5) {
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1open(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5) {
   jint jresult = 0 ;
   unsigned char *arg1 = (unsigned char *) 0 ;
   unsigned long long *arg2 = (unsigned long long *) 0 ;
   unsigned char *arg3 = (unsigned char *) 0 ;
   unsigned long long arg4 ;
   unsigned char *arg5 = (unsigned char *) 0 ;
-  jint *jarr2 ;
   int result;
   
   (void)jenv;
   (void)jcls;
   {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
   }
-  if (!SWIG_JavaArrayInLong(jenv, &jarr2, (long **)&arg2, jarg2)) return 0; 
+  arg2 = *(unsigned long long **)&jarg2; 
   {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
+    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0); 
   }
   arg4 = (unsigned long long)jarg4; 
   {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
+    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0); 
   }
   result = (int)crypto_sign_open(arg1,arg2,(unsigned char const *)arg3,arg4,(unsigned char const *)arg5);
   jresult = (jint)result; 
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  SWIG_JavaArrayArgoutLong(jenv, jarr2, (long *)arg2, jarg2); 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
   }
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0); 
   }
   
-  free(arg2); 
   
   
   return jresult;
 }
 
 
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1detached(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jintArray jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5) {
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1detached(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5) {
   jint jresult = 0 ;
   unsigned char *arg1 = (unsigned char *) 0 ;
   unsigned long long *arg2 = (unsigned long long *) 0 ;
   unsigned char *arg3 = (unsigned char *) 0 ;
   unsigned long long arg4 ;
   unsigned char *arg5 = (unsigned char *) 0 ;
-  jint *jarr2 ;
   int result;
   
   (void)jenv;
   (void)jcls;
   {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
   }
-  if (!SWIG_JavaArrayInLong(jenv, &jarr2, (long **)&arg2, jarg2)) return 0; 
+  arg2 = *(unsigned long long **)&jarg2; 
   {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
+    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0); 
   }
   arg4 = (unsigned long long)jarg4; 
   {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
+    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0); 
   }
   result = (int)crypto_sign_detached(arg1,arg2,(unsigned char const *)arg3,arg4,(unsigned char const *)arg5);
   jresult = (jint)result; 
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  SWIG_JavaArrayArgoutLong(jenv, jarr2, (long *)arg2, jarg2); 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
   }
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0); 
   }
   
-  free(arg2); 
   
   
   return jresult;
@@ -959,797 +377,26 @@ SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1
   (void)jenv;
   (void)jcls;
   {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
   }
   {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
+    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0); 
   }
   arg3 = (unsigned long long)jarg3; 
   {
-    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0);
+    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0); 
   }
   result = (int)crypto_sign_verify_detached((unsigned char const *)arg1,(unsigned char const *)arg2,arg3,(unsigned char const *)arg4);
   jresult = (jint)result; 
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
   }
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0); 
   }
   {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0);
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0); 
   }
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1aead_1chacha20poly1305_1encrypt(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jintArray jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5, jlong jarg6, jbyteArray jarg7, jbyteArray jarg8, jbyteArray jarg9) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned long long *arg2 = (unsigned long long *) 0 ;
-  unsigned char *arg3 = (unsigned char *) 0 ;
-  unsigned long long arg4 ;
-  unsigned char *arg5 = (unsigned char *) 0 ;
-  unsigned long long arg6 ;
-  unsigned char *arg7 = (unsigned char *) 0 ;
-  unsigned char *arg8 = (unsigned char *) 0 ;
-  unsigned char *arg9 = (unsigned char *) 0 ;
-  jint *jarr2 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  if (!SWIG_JavaArrayInLong(jenv, &jarr2, (long **)&arg2, jarg2)) return 0; 
-  {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
-  }
-  arg4 = (unsigned long long)jarg4; 
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  arg6 = (unsigned long long)jarg6; 
-  {
-    arg7 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg7, 0);
-  }
-  {
-    arg8 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg8, 0);
-  }
-  {
-    arg9 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg9, 0);
-  }
-  result = (int)crypto_aead_chacha20poly1305_encrypt(arg1,arg2,(unsigned char const *)arg3,arg4,(unsigned char const *)arg5,arg6,(unsigned char const *)arg7,(unsigned char const *)arg8,(unsigned char const *)arg9);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  SWIG_JavaArrayArgoutLong(jenv, jarr2, (long *)arg2, jarg2); 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg7, (jbyte *) arg7, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg8, (jbyte *) arg8, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg9, (jbyte *) arg9, 0);
-  }
-  
-  free(arg2); 
-  
-  
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1aead_1chacha20poly1305_1decrypt(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jintArray jarg2, jbyteArray jarg3, jbyteArray jarg4, jlong jarg5, jbyteArray jarg6, jlong jarg7, jbyteArray jarg8, jbyteArray jarg9) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned long long *arg2 = (unsigned long long *) 0 ;
-  unsigned char *arg3 = (unsigned char *) 0 ;
-  unsigned char *arg4 = (unsigned char *) 0 ;
-  unsigned long long arg5 ;
-  unsigned char *arg6 = (unsigned char *) 0 ;
-  unsigned long long arg7 ;
-  unsigned char *arg8 = (unsigned char *) 0 ;
-  unsigned char *arg9 = (unsigned char *) 0 ;
-  jint *jarr2 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  if (!SWIG_JavaArrayInLong(jenv, &jarr2, (long **)&arg2, jarg2)) return 0; 
-  {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
-  }
-  {
-    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0);
-  }
-  arg5 = (unsigned long long)jarg5; 
-  {
-    arg6 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg6, 0);
-  }
-  arg7 = (unsigned long long)jarg7; 
-  {
-    arg8 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg8, 0);
-  }
-  {
-    arg9 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg9, 0);
-  }
-  result = (int)crypto_aead_chacha20poly1305_decrypt(arg1,arg2,arg3,(unsigned char const *)arg4,arg5,(unsigned char const *)arg6,arg7,(unsigned char const *)arg8,(unsigned char const *)arg9);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  SWIG_JavaArrayArgoutLong(jenv, jarr2, (long *)arg2, jarg2); 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg6, (jbyte *) arg6, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg8, (jbyte *) arg8, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg9, (jbyte *) arg9, 0);
-  }
-  
-  free(arg2); 
-  
-  
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1hash_1sha256(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jlong jarg3) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  unsigned long long arg3 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  arg3 = (unsigned long long)jarg3; 
-  result = (int)crypto_hash_sha256(arg1,(unsigned char const *)arg2,arg3);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1hash_1sha512(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jlong jarg3) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  unsigned long long arg3 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  arg3 = (unsigned long long)jarg3; 
-  result = (int)crypto_hash_sha512(arg1,(unsigned char const *)arg2,arg3);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1generichash_1blake2b(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5, jlong jarg6) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  size_t arg2 ;
-  unsigned char *arg3 = (unsigned char *) 0 ;
-  unsigned long long arg4 ;
-  unsigned char *arg5 = (unsigned char *) 0 ;
-  size_t arg6 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  arg2 = (size_t)jarg2; 
-  {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
-  }
-  arg4 = (unsigned long long)jarg4; 
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  arg6 = (size_t)jarg6; 
-  result = (int)crypto_generichash_blake2b(arg1,arg2,(unsigned char const *)arg3,arg4,(unsigned char const *)arg5,arg6);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1pwhash_1scryptsalsa208sha256(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jstring jarg3, jlong jarg4, jbyteArray jarg5, jlong jarg6, jlong jarg7) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) (unsigned char *)0 ;
-  unsigned long long arg2 ;
-  char *arg3 = (char *) (char *)0 ;
-  unsigned long long arg4 ;
-  unsigned char *arg5 = (unsigned char *) (unsigned char *)0 ;
-  unsigned long long arg6 ;
-  size_t arg7 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  arg2 = (unsigned long long)jarg2; 
-  arg3 = 0;
-  if (jarg3) {
-    arg3 = (char *)(*jenv)->GetStringUTFChars(jenv, jarg3, 0);
-    if (!arg3) return 0;
-  }
-  arg4 = (unsigned long long)jarg4; 
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  arg6 = (unsigned long long)jarg6; 
-  arg7 = (size_t)jarg7; 
-  result = (int)crypto_pwhash_scryptsalsa208sha256(arg1,arg2,(char const *)arg3,arg4,(unsigned char const *)arg5,arg6,arg7);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  
-  if (arg3) (*jenv)->ReleaseStringUTFChars(jenv, jarg3, (const char *)arg3);
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1box_1curve25519xsalsa20poly1305_1keypair(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  result = (int)crypto_box_curve25519xsalsa20poly1305_keypair(arg1,arg2);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT void JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_randombytes(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2) {
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned long long arg2 ;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  arg2 = (unsigned long long)jarg2; 
-  randombytes(arg1,arg2);
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1box_1curve25519xsalsa20poly1305(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jlong jarg3, jbyteArray jarg4, jbyteArray jarg5, jbyteArray jarg6) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  unsigned long long arg3 ;
-  unsigned char *arg4 = (unsigned char *) 0 ;
-  unsigned char *arg5 = (unsigned char *) 0 ;
-  unsigned char *arg6 = (unsigned char *) 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  arg3 = (unsigned long long)jarg3; 
-  {
-    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0);
-  }
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  {
-    arg6 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg6, 0);
-  }
-  result = (int)crypto_box_curve25519xsalsa20poly1305(arg1,(unsigned char const *)arg2,arg3,(unsigned char const *)arg4,(unsigned char const *)arg5,(unsigned char const *)arg6);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg6, (jbyte *) arg6, 0);
-  }
-  
-  
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1box_1curve25519xsalsa20poly1305_1open(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jlong jarg3, jbyteArray jarg4, jbyteArray jarg5, jbyteArray jarg6) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  unsigned long long arg3 ;
-  unsigned char *arg4 = (unsigned char *) 0 ;
-  unsigned char *arg5 = (unsigned char *) 0 ;
-  unsigned char *arg6 = (unsigned char *) 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  arg3 = (unsigned long long)jarg3; 
-  {
-    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0);
-  }
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  {
-    arg6 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg6, 0);
-  }
-  result = (int)crypto_box_curve25519xsalsa20poly1305_open(arg1,(unsigned char const *)arg2,arg3,(unsigned char const *)arg4,(unsigned char const *)arg5,(unsigned char const *)arg6);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg6, (jbyte *) arg6, 0);
-  }
-  
-  
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1scalarmult_1curve25519(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jbyteArray jarg3) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  unsigned char *arg3 = (unsigned char *) 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
-  }
-  result = (int)crypto_scalarmult_curve25519(arg1,(unsigned char const *)arg2,(unsigned char const *)arg3);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
-  }
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1secretbox_1xsalsa20poly1305(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jlong jarg3, jbyteArray jarg4, jbyteArray jarg5) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  unsigned long long arg3 ;
-  unsigned char *arg4 = (unsigned char *) 0 ;
-  unsigned char *arg5 = (unsigned char *) 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  arg3 = (unsigned long long)jarg3; 
-  {
-    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0);
-  }
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  result = (int)crypto_secretbox_xsalsa20poly1305(arg1,(unsigned char const *)arg2,arg3,(unsigned char const *)arg4,(unsigned char const *)arg5);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1secretbox_1xsalsa20poly1305_1open(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jlong jarg3, jbyteArray jarg4, jbyteArray jarg5) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  unsigned long long arg3 ;
-  unsigned char *arg4 = (unsigned char *) 0 ;
-  unsigned char *arg5 = (unsigned char *) 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  arg3 = (unsigned long long)jarg3; 
-  {
-    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0);
-  }
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  result = (int)crypto_secretbox_xsalsa20poly1305_open(arg1,(unsigned char const *)arg2,arg3,(unsigned char const *)arg4,(unsigned char const *)arg5);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1ed25519_1seed_1keypair(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jbyteArray jarg3) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  unsigned char *arg3 = (unsigned char *) 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
-  }
-  result = (int)crypto_sign_ed25519_seed_keypair(arg1,arg2,(unsigned char const *)arg3);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
-  }
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1ed25519(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jintArray jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned long long *arg2 = (unsigned long long *) 0 ;
-  unsigned char *arg3 = (unsigned char *) 0 ;
-  unsigned long long arg4 ;
-  unsigned char *arg5 = (unsigned char *) 0 ;
-  jint *jarr2 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  if (!SWIG_JavaArrayInLong(jenv, &jarr2, (long **)&arg2, jarg2)) return 0; 
-  {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
-  }
-  arg4 = (unsigned long long)jarg4; 
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  result = (int)crypto_sign_ed25519(arg1,arg2,(unsigned char const *)arg3,arg4,(unsigned char const *)arg5);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  SWIG_JavaArrayArgoutLong(jenv, jarr2, (long *)arg2, jarg2); 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  
-  free(arg2); 
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1ed25519_1open(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jintArray jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned long long *arg2 = (unsigned long long *) 0 ;
-  unsigned char *arg3 = (unsigned char *) 0 ;
-  unsigned long long arg4 ;
-  unsigned char *arg5 = (unsigned char *) 0 ;
-  jint *jarr2 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  if (!SWIG_JavaArrayInLong(jenv, &jarr2, (long **)&arg2, jarg2)) return 0; 
-  {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
-  }
-  arg4 = (unsigned long long)jarg4; 
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  result = (int)crypto_sign_ed25519_open(arg1,arg2,(unsigned char const *)arg3,arg4,(unsigned char const *)arg5);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  SWIG_JavaArrayArgoutLong(jenv, jarr2, (long *)arg2, jarg2); 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  
-  free(arg2); 
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1stream_1xsalsa20(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jbyteArray jarg3, jbyteArray jarg4) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned long long arg2 ;
-  unsigned char *arg3 = (unsigned char *) 0 ;
-  unsigned char *arg4 = (unsigned char *) 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  arg2 = (unsigned long long)jarg2; 
-  {
-    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0);
-  }
-  {
-    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0);
-  }
-  result = (int)crypto_stream_xsalsa20(arg1,arg2,(unsigned char const *)arg3,(unsigned char const *)arg4);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0);
-  }
-  
-  
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1stream_1xsalsa20_1xor(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jlong jarg3, jbyteArray jarg4, jbyteArray jarg5) {
-  jint jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) 0 ;
-  unsigned char *arg2 = (unsigned char *) 0 ;
-  unsigned long long arg3 ;
-  unsigned char *arg4 = (unsigned char *) 0 ;
-  unsigned char *arg5 = (unsigned char *) 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  {
-    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0);
-  }
-  {
-    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0);
-  }
-  arg3 = (unsigned long long)jarg3; 
-  {
-    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0);
-  }
-  {
-    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0);
-  }
-  result = (int)crypto_stream_xsalsa20_xor(arg1,(unsigned char const *)arg2,arg3,(unsigned char const *)arg4,(unsigned char const *)arg5);
-  jresult = (jint)result; 
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0);
-  }
-  {
-    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0);
-  }
-  
   
   
   

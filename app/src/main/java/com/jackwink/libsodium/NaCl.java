@@ -4,6 +4,7 @@ package com.jackwink.libsodium;
  * Created by jackwink on 2/16/15.
  */
 import com.jackwink.libsodium.jni.Sodium;
+import com.jackwink.libsodium.jni.SodiumConstants;
 
 public class NaCl {
     public static String sodium_version_string() {
@@ -26,9 +27,29 @@ public class NaCl {
         return instance;
     }
 
-    public int crypto_sign_keypair(byte[] pk, byte[] sk) {
-        return Sodium.crypto_sign_keypair(pk, sk);
+    public int crypto_sign_keypair(byte[] publicKey, byte[] secretKey) {
+        return Sodium.crypto_sign_keypair(publicKey, secretKey);
     }
+
+    public byte[] crypto_sign(byte[] message, byte[] secretKey) {
+        byte[] signed_message = new byte[SodiumConstants.CRYPTO_SIGN_BYTES + message.length];
+        if (Sodium.crypto_sign(signed_message, null, message, message.length, secretKey) != 0) {
+            return null;
+        }
+        return signed_message;
+    }
+
+    public byte[] crypto_sign_open(byte[] signedMessage, byte[] publicKey) {
+        byte[] message = new byte[signedMessage.length - SodiumConstants.CRYPTO_SIGN_BYTES];
+        if (Sodium.crypto_sign_open(message, null, signedMessage,
+                                    signedMessage.length, publicKey) != 0) {
+            return null;
+        }
+        return message;
+    }
+
+    public
+
 
     static {
         System.loadLibrary("sodiumjni");
