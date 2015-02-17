@@ -11,7 +11,7 @@ public class NaCl {
     protected NaCl() {
         // Exists only to defeat instantiation.
         if (Sodium.sodium_init() == -1) {
-            throw new RuntimeException("Sodium could not initialize.");
+            throw new RuntimeException("Sodium could not be initialized.");
         }
     }
 
