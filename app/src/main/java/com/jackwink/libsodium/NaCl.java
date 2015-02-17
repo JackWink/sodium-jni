@@ -6,6 +6,10 @@ package com.jackwink.libsodium;
 import com.jackwink.libsodium.jni.Sodium;
 
 public class NaCl {
+    public static String sodium_version_string() {
+        return Sodium.sodium_version_string();
+    }
+
     private static NaCl instance = null;
 
     protected NaCl() {
@@ -22,17 +26,7 @@ public class NaCl {
         return instance;
     }
 
-    public static String sodium_version_string() {
-        return Sodium.sodium_version_string();
-    }
-
-
-    public int sodium_init() {
-        return Sodium.sodium_init();
-    }
-
-
-    public static int crypto_sign_keypair(byte[] pk, byte[] sk) {
+    public int crypto_sign_keypair(byte[] pk, byte[] sk) {
         return Sodium.crypto_sign_keypair(pk, sk);
     }
 
