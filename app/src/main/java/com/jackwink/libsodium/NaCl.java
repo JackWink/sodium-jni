@@ -9,7 +9,7 @@ public class NaCl {
     private static NaCl instance = null;
 
     protected NaCl() {
-        // Exists only to defeat instantiation.
+        // Exists to defeat instantiation and force the first created instance to call sodium_init
         if (Sodium.sodium_init() == -1) {
             throw new RuntimeException("Sodium could not be initialized.");
         }
