@@ -6,15 +6,21 @@
 %include "carrays.i"
 %include "various.i"
 
-/* Integer Types */
+/* SWIG uses BigInts for unsigned long longs, but BigInts are obnoxious
+ * and so we'd like to use a java long. typemaps.i defines unsigned long as a java long,
+ * so although we do lose 'unsigned', hopefully we can rely on the callers not to pass in
+ * a negative size.
+ */
 %apply unsigned long { unsigned long long };
 
-/* This may be wrong... */
+/* This looks pretty wrong, libsodium seems to be using 'unsigned long long *' when it wants to pass
+ * back a length value, this was taken right from kalium-jni */
 %apply long[] {unsigned long long *};
 
+/* Not sure if this is used yet, but size_t is most definitely used in some places in libsodium */
 %apply unsigned long { size_t };
 
-/* Character/Byte Types */
+/* Character/Byte Types (taken from kalium-jni) */
 %typemap(jni) unsigned char *"jbyteArray"
 %typemap(jni) char *BYTE "jbyteArray"
 
@@ -59,7 +65,7 @@ int sodium_init(void);
 
 const char *sodium_version_string(void);
 
-/* crypto_sign.h */
+/* crypto_sign.h & crypto_sign_*.h */
 
 #define CRYPTO_SIGN_BYTES 64 
 #define CRYPTO_SIGN_SEEDBYTES 32 
