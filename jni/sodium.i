@@ -7,8 +7,12 @@
 %include "various.i"
 
 /* Integer Types */
-%apply int {unsigned long long};
+%apply unsigned long { unsigned long long };
+
+/* This may be wrong... */
 %apply long[] {unsigned long long *};
+
+%apply unsigned long { size_t };
 
 /* Character/Byte Types */
 %typemap(jni) unsigned char *"jbyteArray"
@@ -43,15 +47,45 @@
 %typemap(freearg) unsigned char *""
 %typemap(freearg) char *BYTE ""
 
+%javaconst(1);
 
 /* Start Sodium Definitions */
 %{
 #include "sodium.h"
 %}
 
+/* core.h */
 int sodium_init(void);
 
 const char *sodium_version_string(void);
+
+/* crypto_sign.h */
+
+#define CRYPTO_SIGN_BYTES 64 
+#define CRYPTO_SIGN_SEEDBYTES 32 
+#define CRYPTO_SIGN_PUBLICKEYBYTES 32
+#define CRYPTO_SIGN_SECRETKEYBYTES (32 + 32)
+
+int crypto_sign_keypair(unsigned char *pk, unsigned char *sk);
+
+int crypto_sign(unsigned char *sm, unsigned long long *smlen_p,
+                const unsigned char *m, unsigned long long mlen,
+                const unsigned char *sk);
+
+int crypto_sign_open(unsigned char *m, unsigned long long *mlen_p,
+                     const unsigned char *sm, unsigned long long smlen,
+                     const unsigned char *pk);
+
+int crypto_sign_detached(unsigned char *sig, unsigned long long *siglen_p,
+                         const unsigned char *m, unsigned long long mlen,
+                         const unsigned char *sk);
+
+int crypto_sign_verify_detached(const unsigned char *sig,
+                                const unsigned char *m,
+                                unsigned long long mlen,
+                                const unsigned char *pk);
+
+/* Old */
 
 int crypto_aead_chacha20poly1305_encrypt(unsigned char *c,
                                          unsigned long long *clen,
