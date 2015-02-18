@@ -1,11 +1,6 @@
 /* sodium.i */
 %module Sodium
 %include "typemaps.i"
-/*%include "various.i"*/
-/*%include "stdint.i"
-%include "arrays_java.i"
-%include "carrays.i"
-*/
 
 /**
  * Defines unsigned char * (C) -> byte[] (Java)
