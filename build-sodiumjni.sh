@@ -72,8 +72,8 @@ mv $SODIUMJNI_HOME/libs $SODIUMJNI_SRC_ROOT/main/lib
 #   Step 4
 #
 
-#cd $SODIUMJNI_HOME
-#./gradlew build
+cd $SODIUMJNI_HOME
+./gradlew build
 
 rm -rf $SODIUMJNI_HOME/build 
 rm -rf $SODIUMJNI_HOME/sodiumjni-androidlib
