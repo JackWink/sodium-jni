@@ -83,4 +83,9 @@ int crypto_sign_verify_detached(const unsigned char *sig,
                                 unsigned long long mlen,
                                 const unsigned char *pk);
 
+int crypto_sign_ed25519_sk_to_seed(unsigned char *seed,
+                                   const unsigned char *sk);
+
+int crypto_sign_ed25519_sk_to_pk(unsigned char *pk, const unsigned char *sk);
+
 

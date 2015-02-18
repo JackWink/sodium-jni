@@ -64,6 +64,22 @@ public class NaCl {
         return Sodium.crypto_sign_verify_detached(signature, message, message.length, publicKey) == 0;
     }
 
+    public byte[] crypto_sign_ed25519_sk_to_seed(byte[] secretKey) {
+        byte[] seed = new byte[SodiumConstants.CRYPTO_SIGN_SEEDBYTES];
+        if (Sodium.crypto_sign_ed25519_sk_to_seed(seed, secretKey) != 0) {
+            return null;
+        }
+        return seed;
+    }
+
+    public byte[] crypto_sign_ed25519_sk_to_pk(byte[] secretKey) {
+        byte[] publicKey = new byte[SodiumConstants.CRYPTO_SIGN_PUBLICKEYBYTES];
+        if (Sodium.crypto_sign_ed25519_sk_to_pk(publicKey, secretKey) != 0) {
+            return null;
+        }
+        return publicKey;
+    }
+
     static {
         System.loadLibrary("sodiumjni");
     }

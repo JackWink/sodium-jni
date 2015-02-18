@@ -41,4 +41,12 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.crypto_sign_verify_detached(sig, m, mlen, pk);
   }
 
+  public static int crypto_sign_ed25519_sk_to_seed(byte[] seed, byte[] sk) {
+    return SodiumJNI.crypto_sign_ed25519_sk_to_seed(seed, sk);
+  }
+
+  public static int crypto_sign_ed25519_sk_to_pk(byte[] pk, byte[] sk) {
+    return SodiumJNI.crypto_sign_ed25519_sk_to_pk(pk, sk);
+  }
+
 }
