@@ -31,12 +31,16 @@ public class NaCl {
         return Sodium.crypto_sign_keypair(publicKey, secretKey);
     }
 
+    public int crypto_sign_seed_keypair(byte[] publicKey, byte[] secretKey, byte[] seed) {
+        return Sodium.crypto_sign_seed_keypair(publicKey, secretKey, seed);
+    }
+
     public byte[] crypto_sign(byte[] message, byte[] secretKey) {
-        byte[] signed_message = new byte[SodiumConstants.CRYPTO_SIGN_BYTES + message.length];
-        if (Sodium.crypto_sign(signed_message, null, message, message.length, secretKey) != 0) {
+        byte[] signedMessage = new byte[SodiumConstants.CRYPTO_SIGN_BYTES + message.length];
+        if (Sodium.crypto_sign(signedMessage, null, message, message.length, secretKey) != 0) {
             return null;
         }
-        return signed_message;
+        return signedMessage;
     }
 
     public byte[] crypto_sign_open(byte[] signedMessage, byte[] publicKey) {
@@ -48,8 +52,17 @@ public class NaCl {
         return message;
     }
 
-    public
+    public byte[] crypto_sign_detached(byte[] message, byte[] secretKey) {
+        byte[] signature = new byte[SodiumConstants.CRYPTO_SIGN_BYTES];
+        if (Sodium.crypto_sign_detached(signature, null, message, message.length, secretKey) != 0) {
+            return null;
+        }
+        return signature;
+    }
 
+    public boolean crypto_sign_verify_detached(byte[] signature, byte[] message, byte[] publicKey) {
+        return Sodium.crypto_sign_verify_detached(signature, message, message.length, publicKey) == 0;
+    }
 
     static {
         System.loadLibrary("sodiumjni");

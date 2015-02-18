@@ -246,6 +246,42 @@ SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1
 }
 
 
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1seed_1keypair(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2, jbyteArray jarg3) {
+  jint jresult = 0 ;
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  unsigned char *arg2 = (unsigned char *) 0 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  {
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
+  }
+  {
+    arg2 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg2, 0); 
+  }
+  {
+    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0); 
+  }
+  result = (int)crypto_sign_seed_keypair(arg1,arg2,(unsigned char const *)arg3);
+  jresult = (jint)result; 
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg2, (jbyte *) arg2, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0); 
+  }
+  
+  
+  
+  return jresult;
+}
+
+
 SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5) {
   jint jresult = 0 ;
   unsigned char *arg1 = (unsigned char *) 0 ;

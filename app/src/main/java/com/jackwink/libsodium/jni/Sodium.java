@@ -21,6 +21,10 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.crypto_sign_keypair(pk, sk);
   }
 
+  public static int crypto_sign_seed_keypair(byte[] pk, byte[] sk, byte[] seed) {
+    return SodiumJNI.crypto_sign_seed_keypair(pk, sk, seed);
+  }
+
   public static int crypto_sign(byte[] sm, SWIGTYPE_p_unsigned_long_long smlem, byte[] m, long mlen, byte[] sk) {
     return SodiumJNI.crypto_sign(sm, SWIGTYPE_p_unsigned_long_long.getCPtr(smlem), m, mlen, sk);
   }

@@ -30,5 +30,13 @@ public class TestSodium extends TestCase {
         Log.d("sodiumjni", "Original: " + Arrays.toString(original));
         Log.d("sodiumjni", "Signed: " + Arrays.toString(testSig));
         Log.d("sodiumjni", "Opened: " + Arrays.toString(message));
+
+        byte[] justSig = cryptoProvider.crypto_sign_detached(original, secretKey);
+        boolean success = cryptoProvider.crypto_sign_verify_detached(justSig, original, publicKey);
+        Log.d("sodiumjni", "Original: " + Arrays.toString(original));
+        Log.d("sodiumjni", "Signature: " + Arrays.toString(justSig));
+        Log.d("sodiumjni", "Verified: " + success);
     }
+
+
 }

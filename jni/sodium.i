@@ -63,6 +63,9 @@ const char *sodium_version_string(void);
 
 int crypto_sign_keypair(unsigned char *pk, unsigned char *sk);
 
+int crypto_sign_seed_keypair(unsigned char *pk, unsigned char *sk,
+                             const unsigned char *seed);
+
 int crypto_sign(unsigned char *sm, unsigned long long *smlem,
                 const unsigned char *m, unsigned long long mlen,
                 const unsigned char *sk);
