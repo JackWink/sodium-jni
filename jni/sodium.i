@@ -83,4 +83,30 @@ int crypto_sign_ed25519_sk_to_seed(unsigned char *seed,
 
 int crypto_sign_ed25519_sk_to_pk(unsigned char *pk, const unsigned char *sk);
 
+/* crypto_secret_box.h & crypto_secret_box_*.h */
+
+#define CRYPTO_SECRETBOX_KEYBYTES 32
+#define CRYPTO_SECRETBOX_MACBYTES 16 
+#define CRYPTO_SECRETBOX_NONCEBYTES 24
+
+int crypto_secretbox_easy(unsigned char *c, const unsigned char *m,
+                          unsigned long long mlen, const unsigned char *n,
+                          const unsigned char *k);
+
+int crypto_secretbox_open_easy(unsigned char *m, const unsigned char *c,
+                               unsigned long long clen, const unsigned char *n,
+                               const unsigned char *k);
+
+int crypto_secretbox_detached(unsigned char *c, unsigned char *mac,
+                              const unsigned char *m,
+                              unsigned long long mlen,
+                              const unsigned char *n,
+                              const unsigned char *k);
+
+int crypto_secretbox_open_detached(unsigned char *m,
+                                   const unsigned char *c,
+                                   const unsigned char *mac,
+                                   unsigned long long clen,
+                                   const unsigned char *n,
+                                   const unsigned char *k);
 

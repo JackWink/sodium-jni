@@ -49,4 +49,20 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.crypto_sign_ed25519_sk_to_pk(pk, sk);
   }
 
+  public static int crypto_secretbox_easy(byte[] c, byte[] m, long mlen, byte[] n, byte[] k) {
+    return SodiumJNI.crypto_secretbox_easy(c, m, mlen, n, k);
+  }
+
+  public static int crypto_secretbox_open_easy(byte[] m, byte[] c, long clen, byte[] n, byte[] k) {
+    return SodiumJNI.crypto_secretbox_open_easy(m, c, clen, n, k);
+  }
+
+  public static int crypto_secretbox_detached(byte[] c, byte[] mac, byte[] m, long mlen, byte[] n, byte[] k) {
+    return SodiumJNI.crypto_secretbox_detached(c, mac, m, mlen, n, k);
+  }
+
+  public static int crypto_secretbox_open_detached(byte[] m, byte[] c, byte[] mac, long clen, byte[] n, byte[] k) {
+    return SodiumJNI.crypto_secretbox_open_detached(m, c, mac, clen, n, k);
+  }
+
 }
