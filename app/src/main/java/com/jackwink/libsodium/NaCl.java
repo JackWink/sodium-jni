@@ -5,7 +5,6 @@ package com.jackwink.libsodium;
  */
 import com.jackwink.libsodium.jni.Sodium;
 import com.jackwink.libsodium.jni.SodiumConstants;
-import com.jackwink.libsodium.jni.SodiumJNI;
 
 public class NaCl {
     public static String sodium_version_string() {
@@ -15,10 +14,6 @@ public class NaCl {
     private static NaCl instance = null;
 
     protected NaCl() {
-        // Exists to defeat instantiation and force the first created instance to call sodium_init
-        if (Sodium.sodium_init() == -1) {
-            throw new RuntimeException("Sodium could not be initialized.");
-        }
     }
 
     public static NaCl getInstance() {
@@ -107,9 +102,5 @@ public class NaCl {
 
     public static int crypto_secretbox_open_detached(byte[] m, byte[] c, byte[] mac, byte[] n, byte[] k) {
         return Sodium.crypto_secretbox_open_detached(m, c, mac, c.length, n, k);
-    }
-
-    static {
-        System.loadLibrary("sodiumjni");
     }
 }

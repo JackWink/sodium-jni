@@ -26,4 +26,18 @@ public class SodiumJNI {
   public final static native int crypto_secretbox_open_easy(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4, byte[] jarg5);
   public final static native int crypto_secretbox_detached(byte[] jarg1, byte[] jarg2, byte[] jarg3, long jarg4, byte[] jarg5, byte[] jarg6);
   public final static native int crypto_secretbox_open_detached(byte[] jarg1, byte[] jarg2, byte[] jarg3, long jarg4, byte[] jarg5, byte[] jarg6);
+
+        /* Load JNI library */
+        static {
+                try {
+                    System.loadLibrary("sodiumjni");
+                    if (sodium_init() == -1) {
+                        throw new RuntimeException("Sodium could not be initialized.");
+                    }
+                } catch (Exception e) {
+                        e.printStackTrace();
+                        System.exit(1);
+                }
+        }
+
 }

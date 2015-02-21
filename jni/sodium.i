@@ -124,4 +124,17 @@ int crypto_secretbox_open_detached(unsigned char *m,
                                    unsigned long long clen,
                                    const unsigned char *n,
                                    const unsigned char *k);
-
+%pragma(java) jniclasscode = %{
+        /* Load JNI library */
+        static {
+                try {
+                    System.loadLibrary("sodiumjni");
+                    if (sodium_init() == -1) {
+                        throw new RuntimeException("Sodium could not be initialized.");
+                    }
+                } catch (Exception e) {
+                        e.printStackTrace();
+                        System.exit(1);
+                }
+        }
+%} 
