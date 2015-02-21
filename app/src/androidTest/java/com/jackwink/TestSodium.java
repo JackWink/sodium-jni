@@ -3,6 +3,7 @@ package com.jackwink;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.util.Log;
 
+import com.jackwink.libsodium.CryptoSign;
 import com.jackwink.libsodium.NaCl;
 import com.jackwink.libsodium.jni.Sodium;
 import com.jackwink.libsodium.jni.SodiumConstants;
@@ -19,22 +20,22 @@ public class TestSodium extends TestCase {
 
     @SmallTest
     public void testSignature() {
-        NaCl cryptoProvider = NaCl.getInstance();
+
 
         byte[] publicKey = new byte[SodiumConstants.CRYPTO_SIGN_PUBLICKEYBYTES];
         byte[] secretKey = new byte[SodiumConstants.CRYPTO_SIGN_SECRETKEYBYTES];
-        cryptoProvider.crypto_sign_keypair(publicKey, secretKey);
+        CryptoSign.keypair(publicKey, secretKey);
 
         byte[] original = "test".getBytes();
-        byte[] testSig = cryptoProvider.crypto_sign(original, secretKey);
-        byte[] message = cryptoProvider.crypto_sign_open(testSig, publicKey);
+        byte[] testSig = CryptoSign.sign(original, secretKey);
+        byte[] message = CryptoSign.open(testSig, publicKey);
 
         if (!Arrays.equals(original, message)) {
             fail("Message not verified.");
         }
 
-        byte[] justSig = cryptoProvider.crypto_sign_detached(original, secretKey);
-        boolean success = cryptoProvider.crypto_sign_verify_detached(justSig, original, publicKey);
+        byte[] justSig = CryptoSign.sign_detached(original, secretKey);
+        boolean success = CryptoSign.verify_detached(justSig, original, publicKey);
 
         if (!success) {
             fail("Message detached not verified.");
