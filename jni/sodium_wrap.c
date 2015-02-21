@@ -1112,6 +1112,138 @@ SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1auth_1
 }
 
 
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1aead_1chacha20poly1305_1encrypt(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5, jlong jarg6, jbyteArray jarg7, jbyteArray jarg8, jbyteArray jarg9) {
+  jint jresult = 0 ;
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  unsigned long long *arg2 = (unsigned long long *) 0 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  unsigned long long arg4 ;
+  unsigned char *arg5 = (unsigned char *) 0 ;
+  unsigned long long arg6 ;
+  unsigned char *arg7 = (unsigned char *) 0 ;
+  unsigned char *arg8 = (unsigned char *) 0 ;
+  unsigned char *arg9 = (unsigned char *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  {
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
+  }
+  arg2 = *(unsigned long long **)&jarg2; 
+  {
+    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0); 
+  }
+  arg4 = (unsigned long long)jarg4; 
+  {
+    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0); 
+  }
+  arg6 = (unsigned long long)jarg6; 
+  {
+    arg7 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg7, 0); 
+  }
+  {
+    arg8 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg8, 0); 
+  }
+  {
+    arg9 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg9, 0); 
+  }
+  result = (int)crypto_aead_chacha20poly1305_encrypt(arg1,arg2,(unsigned char const *)arg3,arg4,(unsigned char const *)arg5,arg6,(unsigned char const *)arg7,(unsigned char const *)arg8,(unsigned char const *)arg9);
+  jresult = (jint)result; 
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg7, (jbyte *) arg7, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg8, (jbyte *) arg8, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg9, (jbyte *) arg9, 0); 
+  }
+  
+  
+  
+  
+  
+  
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1aead_1chacha20poly1305_1decrypt(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jbyteArray jarg3, jbyteArray jarg4, jlong jarg5, jbyteArray jarg6, jlong jarg7, jbyteArray jarg8, jbyteArray jarg9) {
+  jint jresult = 0 ;
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  unsigned long long *arg2 = (unsigned long long *) 0 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  unsigned char *arg4 = (unsigned char *) 0 ;
+  unsigned long long arg5 ;
+  unsigned char *arg6 = (unsigned char *) 0 ;
+  unsigned long long arg7 ;
+  unsigned char *arg8 = (unsigned char *) 0 ;
+  unsigned char *arg9 = (unsigned char *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  {
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
+  }
+  arg2 = *(unsigned long long **)&jarg2; 
+  {
+    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0); 
+  }
+  {
+    arg4 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg4, 0); 
+  }
+  arg5 = (unsigned long long)jarg5; 
+  {
+    arg6 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg6, 0); 
+  }
+  arg7 = (unsigned long long)jarg7; 
+  {
+    arg8 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg8, 0); 
+  }
+  {
+    arg9 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg9, 0); 
+  }
+  result = (int)crypto_aead_chacha20poly1305_decrypt(arg1,arg2,arg3,(unsigned char const *)arg4,arg5,(unsigned char const *)arg6,arg7,(unsigned char const *)arg8,(unsigned char const *)arg9);
+  jresult = (jint)result; 
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg4, (jbyte *) arg4, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg6, (jbyte *) arg6, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg8, (jbyte *) arg8, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg9, (jbyte *) arg9, 0); 
+  }
+  
+  
+  
+  
+  
+  
+  return jresult;
+}
+
+
 #ifdef __cplusplus
 }
 #endif

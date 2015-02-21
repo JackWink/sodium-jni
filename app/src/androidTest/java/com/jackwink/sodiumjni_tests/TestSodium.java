@@ -3,6 +3,7 @@ package com.jackwink.sodiumjni_tests;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.util.Log;
 
+import com.jackwink.libsodium.CryptoAEAD;
 import com.jackwink.libsodium.CryptoAuth;
 import com.jackwink.libsodium.CryptoBox;
 import com.jackwink.libsodium.CryptoSecretBox;
@@ -153,6 +154,28 @@ public class TestSodium extends TestCase {
         byte[] decrypted = CryptoBox.open_detached(ciphertext, mac, nonce, alice_publickey, bob_secretkey);
         if (decrypted == null) {
             fail("Could not open box for bob and alice!");
+        }
+    }
+
+    @SmallTest
+    public void testCryptoAEAD() {
+        byte[] message = "hello!".getBytes();
+        byte[] additionalData = "goodbye!".getBytes();
+
+        byte[] key = new byte[CryptoAEAD.CRYPTO_AED_CHACHA20POLY1305_KEYBYTES];
+        byte[] nonce = new byte[CryptoAEAD.CRYPTO_AED_CHACHA20POLY1305_NONCEBYTES];
+
+        RandomBytes.fillBuffer(nonce);
+        RandomBytes.fillBuffer(key);
+
+        byte[] ciphertext = CryptoAEAD.crypto_aead_chacha20poly1305_encrypt(message, additionalData, nonce, key);
+        if (ciphertext == null) {
+            fail("Could not create CryptoAEAD ciphertext!");
+        }
+
+        byte[] decrypted = CryptoAEAD.crypto_aead_chacha20poly1305_decrypt(ciphertext, additionalData, nonce, key);
+        if (decrypted == null) {
+            fail("Could not decrypt CryptoAEAD ciphertext!");
         }
     }
 }

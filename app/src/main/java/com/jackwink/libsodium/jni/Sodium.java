@@ -109,4 +109,12 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.crypto_auth_verify(h, in, inlen, k);
   }
 
+  public static int crypto_aead_chacha20poly1305_encrypt(byte[] c, SWIGTYPE_p_unsigned_long_long clen, byte[] m, long mlen, byte[] ad, long adlen, byte[] nsec, byte[] npub, byte[] k) {
+    return SodiumJNI.crypto_aead_chacha20poly1305_encrypt(c, SWIGTYPE_p_unsigned_long_long.getCPtr(clen), m, mlen, ad, adlen, nsec, npub, k);
+  }
+
+  public static int crypto_aead_chacha20poly1305_decrypt(byte[] m, SWIGTYPE_p_unsigned_long_long mlen, byte[] nsec, byte[] c, long clen, byte[] ad, long adlen, byte[] npub, byte[] k) {
+    return SodiumJNI.crypto_aead_chacha20poly1305_decrypt(m, SWIGTYPE_p_unsigned_long_long.getCPtr(mlen), nsec, c, clen, ad, adlen, npub, k);
+  }
+
 }

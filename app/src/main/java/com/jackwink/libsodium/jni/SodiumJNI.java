@@ -34,6 +34,8 @@ public class SodiumJNI {
   public final static native int crypto_secretbox_open_detached(byte[] jarg1, byte[] jarg2, byte[] jarg3, long jarg4, byte[] jarg5, byte[] jarg6);
   public final static native int crypto_auth(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4);
   public final static native int crypto_auth_verify(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4);
+  public final static native int crypto_aead_chacha20poly1305_encrypt(byte[] jarg1, long jarg2, byte[] jarg3, long jarg4, byte[] jarg5, long jarg6, byte[] jarg7, byte[] jarg8, byte[] jarg9);
+  public final static native int crypto_aead_chacha20poly1305_decrypt(byte[] jarg1, long jarg2, byte[] jarg3, byte[] jarg4, long jarg5, byte[] jarg6, long jarg7, byte[] jarg8, byte[] jarg9);
 
         /* Load JNI library */
         static {

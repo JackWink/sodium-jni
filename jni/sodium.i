@@ -172,8 +172,31 @@ int crypto_auth(unsigned char *out, const unsigned char *in,
 int crypto_auth_verify(const unsigned char *h, const unsigned char *in,
                        unsigned long long inlen, const unsigned char *k);
 
+/* crypto_aead.h */
 
+#define CRYPTO_AED_CHACHA20POLY1305_KEYBYTES 32
+#define CRYPTO_AED_CHACHA20POLY1305_NONCEBYTES 32
+#define CRYPTO_AED_CHACHA20POLY1305_MACBYTES 16 
 
+int crypto_aead_chacha20poly1305_encrypt(unsigned char *c,
+                                         unsigned long long *clen,
+                                         const unsigned char *m,
+                                         unsigned long long mlen,
+                                         const unsigned char *ad,
+                                         unsigned long long adlen,
+                                         const unsigned char *nsec,
+                                         const unsigned char *npub,
+                                         const unsigned char *k);
+
+int crypto_aead_chacha20poly1305_decrypt(unsigned char *m,
+                                         unsigned long long *mlen,
+                                         unsigned char *nsec,
+                                         const unsigned char *c,
+                                         unsigned long long clen,
+                                         const unsigned char *ad,
+                                         unsigned long long adlen,
+                                         const unsigned char *npub,
+                                         const unsigned char *k);
 
 /* Static library loader */
 
