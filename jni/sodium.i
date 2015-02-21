@@ -98,6 +98,41 @@ int crypto_sign_ed25519_sk_to_seed(unsigned char *seed,
 
 int crypto_sign_ed25519_sk_to_pk(unsigned char *pk, const unsigned char *sk);
 
+/* crypto_box.h */
+
+#define CRYPTO_BOX_SEEDBYTES 32
+#define CRYPTO_BOX_PUBLICKEYBYTES 32
+#define CRYPTO_BOX_SECRETKEYBYTES 32 
+#define CRYPTO_BOX_NONCEBYTES 24
+#define CRYPTO_BOX_MACBYTES 16
+
+int crypto_box_seed_keypair(unsigned char *pk, unsigned char *sk,
+                            const unsigned char *seed);
+
+int crypto_box_keypair(unsigned char *pk, unsigned char *sk);
+
+int crypto_box_easy(unsigned char *c, const unsigned char *m,
+                    unsigned long long mlen, const unsigned char *n,
+                    const unsigned char *pk, const unsigned char *sk);
+
+
+int crypto_box_open_easy(unsigned char *m, const unsigned char *c,
+                         unsigned long long clen, const unsigned char *n,
+                         const unsigned char *pk, const unsigned char *sk);
+
+int crypto_box_detached(unsigned char *c, unsigned char *mac,
+                        const unsigned char *m, unsigned long long mlen,
+                        const unsigned char *n, const unsigned char *pk,
+                        const unsigned char *sk);
+
+int crypto_box_open_detached(unsigned char *m, const unsigned char *c,
+                             const unsigned char *mac,
+                             unsigned long long clen,
+                             const unsigned char *n,
+                             const unsigned char *pk,
+                             const unsigned char *sk);
+
+
 /* crypto_secret_box.h & crypto_secret_box_*.h */
 
 #define CRYPTO_SECRETBOX_KEYBYTES 32

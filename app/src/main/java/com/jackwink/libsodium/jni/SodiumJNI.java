@@ -22,6 +22,12 @@ public class SodiumJNI {
   public final static native int crypto_sign_verify_detached(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4);
   public final static native int crypto_sign_ed25519_sk_to_seed(byte[] jarg1, byte[] jarg2);
   public final static native int crypto_sign_ed25519_sk_to_pk(byte[] jarg1, byte[] jarg2);
+  public final static native int crypto_box_seed_keypair(byte[] jarg1, byte[] jarg2, byte[] jarg3);
+  public final static native int crypto_box_keypair(byte[] jarg1, byte[] jarg2);
+  public final static native int crypto_box_easy(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4, byte[] jarg5, byte[] jarg6);
+  public final static native int crypto_box_open_easy(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4, byte[] jarg5, byte[] jarg6);
+  public final static native int crypto_box_detached(byte[] jarg1, byte[] jarg2, byte[] jarg3, long jarg4, byte[] jarg5, byte[] jarg6, byte[] jarg7);
+  public final static native int crypto_box_open_detached(byte[] jarg1, byte[] jarg2, byte[] jarg3, long jarg4, byte[] jarg5, byte[] jarg6, byte[] jarg7);
   public final static native int crypto_secretbox_easy(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4, byte[] jarg5);
   public final static native int crypto_secretbox_open_easy(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4, byte[] jarg5);
   public final static native int crypto_secretbox_detached(byte[] jarg1, byte[] jarg2, byte[] jarg3, long jarg4, byte[] jarg5, byte[] jarg6);

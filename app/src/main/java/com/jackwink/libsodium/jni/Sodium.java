@@ -61,6 +61,30 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.crypto_sign_ed25519_sk_to_pk(pk, sk);
   }
 
+  public static int crypto_box_seed_keypair(byte[] pk, byte[] sk, byte[] seed) {
+    return SodiumJNI.crypto_box_seed_keypair(pk, sk, seed);
+  }
+
+  public static int crypto_box_keypair(byte[] pk, byte[] sk) {
+    return SodiumJNI.crypto_box_keypair(pk, sk);
+  }
+
+  public static int crypto_box_easy(byte[] c, byte[] m, long mlen, byte[] n, byte[] pk, byte[] sk) {
+    return SodiumJNI.crypto_box_easy(c, m, mlen, n, pk, sk);
+  }
+
+  public static int crypto_box_open_easy(byte[] m, byte[] c, long clen, byte[] n, byte[] pk, byte[] sk) {
+    return SodiumJNI.crypto_box_open_easy(m, c, clen, n, pk, sk);
+  }
+
+  public static int crypto_box_detached(byte[] c, byte[] mac, byte[] m, long mlen, byte[] n, byte[] pk, byte[] sk) {
+    return SodiumJNI.crypto_box_detached(c, mac, m, mlen, n, pk, sk);
+  }
+
+  public static int crypto_box_open_detached(byte[] m, byte[] c, byte[] mac, long clen, byte[] n, byte[] pk, byte[] sk) {
+    return SodiumJNI.crypto_box_open_detached(m, c, mac, clen, n, pk, sk);
+  }
+
   public static int crypto_secretbox_easy(byte[] c, byte[] m, long mlen, byte[] n, byte[] k) {
     return SodiumJNI.crypto_secretbox_easy(c, m, mlen, n, k);
   }

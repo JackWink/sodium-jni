@@ -1,8 +1,10 @@
 package com.jackwink.sodiumjni_tests;
 
 import android.test.suitebuilder.annotation.SmallTest;
+import android.util.Log;
 
 import com.jackwink.libsodium.CryptoAuth;
+import com.jackwink.libsodium.CryptoBox;
 import com.jackwink.libsodium.CryptoSecretBox;
 import com.jackwink.libsodium.CryptoSign;
 import com.jackwink.libsodium.RandomBytes;
@@ -98,6 +100,59 @@ public class TestSodium extends TestCase {
 
         if (CryptoAuth.verify(mac, "hell0!".getBytes(), key)) {
             fail("verified wrong message!");
+        }
+    }
+
+    @SmallTest
+    public void testCryptoBox() {
+
+        byte[] message = "hello!".getBytes();
+        byte[] alice_publickey = new byte[CryptoBox.CRYPTO_BOX_PUBLICKEYBYTES];
+        byte[] alice_secretkey = new byte[CryptoBox.CRYPTO_BOX_SECRETKEYBYTES];
+        CryptoBox.keypair(alice_publickey, alice_secretkey);
+
+        byte[] bob_publickey = new byte[CryptoBox.CRYPTO_BOX_PUBLICKEYBYTES];
+        byte[] bob_secretkey = new byte[CryptoBox.CRYPTO_BOX_SECRETKEYBYTES];
+        CryptoBox.keypair(bob_publickey, bob_secretkey);
+
+        byte[] nonce = new byte[CryptoBox.CRYPTO_BOX_NONCEBYTES];
+        RandomBytes.fillBuffer(nonce);
+
+        byte[] ciphertext = CryptoBox.create_easy(message, nonce, bob_publickey, alice_secretkey);
+        if (ciphertext == null) {
+            fail("Could not create box for bob and alice!");
+        }
+
+        byte[] decrypted = CryptoBox.open_easy(ciphertext, nonce, alice_publickey, bob_secretkey);
+        if (decrypted == null) {
+            fail("Could not open box for bob and alice!");
+        }
+    }
+
+    @SmallTest
+    public void testCryptoBoxDetached() {
+
+        byte[] message = "hello!".getBytes();
+        byte[] mac = new byte[CryptoBox.CRYPTO_BOX_MACBYTES];
+        byte[] alice_publickey = new byte[CryptoBox.CRYPTO_BOX_PUBLICKEYBYTES];
+        byte[] alice_secretkey = new byte[CryptoBox.CRYPTO_BOX_SECRETKEYBYTES];
+        CryptoBox.keypair(alice_publickey, alice_secretkey);
+
+        byte[] bob_publickey = new byte[CryptoBox.CRYPTO_BOX_PUBLICKEYBYTES];
+        byte[] bob_secretkey = new byte[CryptoBox.CRYPTO_BOX_SECRETKEYBYTES];
+        CryptoBox.keypair(bob_publickey, bob_secretkey);
+
+        byte[] nonce = new byte[CryptoBox.CRYPTO_BOX_NONCEBYTES];
+        RandomBytes.fillBuffer(nonce);
+
+        byte[] ciphertext = CryptoBox.create_detached(mac, message, nonce, bob_publickey, alice_secretkey);
+        if (ciphertext == null) {
+            fail("Could not create box for bob and alice!");
+        }
+
+        byte[] decrypted = CryptoBox.open_detached(ciphertext, mac, nonce, alice_publickey, bob_secretkey);
+        if (decrypted == null) {
+            fail("Could not open box for bob and alice!");
         }
     }
 }
