@@ -77,4 +77,12 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.crypto_secretbox_open_detached(m, c, mac, clen, n, k);
   }
 
+  public static int crypto_auth(byte[] out, byte[] in, long inlen, byte[] k) {
+    return SodiumJNI.crypto_auth(out, in, inlen, k);
+  }
+
+  public static int crypto_auth_verify(byte[] h, byte[] in, long inlen, byte[] k) {
+    return SodiumJNI.crypto_auth_verify(h, in, inlen, k);
+  }
+
 }

@@ -124,6 +124,24 @@ int crypto_secretbox_open_detached(unsigned char *m,
                                    unsigned long long clen,
                                    const unsigned char *n,
                                    const unsigned char *k);
+
+/* crypto_auth.h */
+
+#define CRYPTO_AUTH_BYTES 32
+#define CRYPTO_AUTH_KEYBYTES 32
+
+int crypto_auth(unsigned char *out, const unsigned char *in,
+                unsigned long long inlen, const unsigned char *k);
+
+
+int crypto_auth_verify(const unsigned char *h, const unsigned char *in,
+                       unsigned long long inlen, const unsigned char *k);
+
+
+
+
+/* Static library loader */
+
 %pragma(java) jniclasscode = %{
         /* Load JNI library */
         static {

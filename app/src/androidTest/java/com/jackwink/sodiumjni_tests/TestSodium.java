@@ -2,6 +2,7 @@ package com.jackwink.sodiumjni_tests;
 
 import android.test.suitebuilder.annotation.SmallTest;
 
+import com.jackwink.libsodium.CryptoAuth;
 import com.jackwink.libsodium.CryptoSecretBox;
 import com.jackwink.libsodium.CryptoSign;
 import com.jackwink.libsodium.RandomBytes;
@@ -42,19 +43,61 @@ public class TestSodium extends TestCase {
     }
 
     @SmallTest
-    public void testSecretBox() {
+    public void testSecretBoxEasy() {
         byte[] message = "hello!".getBytes();
         byte[] nonce = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_NONCEBYTES];
         byte[] key = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_KEYBYTES];
-        byte[] ciphertext = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_MACBYTES + message.length];
 
         RandomBytes.fillBuffer(nonce);
         RandomBytes.fillBuffer(key);
-        CryptoSecretBox.easy(ciphertext, message, nonce, key);
+        byte[] ciphertext = CryptoSecretBox.create_easy(message, nonce, key);
+        if (ciphertext == null) {
+            fail("Could not create ciphertext");
+        }
 
-        byte[] decrypted = new byte[ciphertext.length - CryptoSecretBox.CRYPTO_SECRETBOX_MACBYTES];
-        if (CryptoSecretBox.open_easy(decrypted, ciphertext, nonce, key) != 0) {
+        byte[] decrypted = CryptoSecretBox.open_easy(ciphertext, nonce, key);
+        if (decrypted == null) {
             fail("Message forged");
+        }
+    }
+
+    @SmallTest
+    public void testSecretBoxDetached() {
+        byte[] message = "hello!".getBytes();
+        byte[] mac = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_MACBYTES];
+        byte[] nonce = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_NONCEBYTES];
+        byte[] key = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_KEYBYTES];
+
+        RandomBytes.fillBuffer(nonce);
+        RandomBytes.fillBuffer(key);
+        byte[] ciphertext = CryptoSecretBox.create_detached(mac, message, nonce, key);
+        if (ciphertext == null) {
+            fail("Could not create ciphertext detached!");
+        }
+
+        byte[] decrypted = CryptoSecretBox.open_detached(ciphertext, mac, nonce, key);
+        if (decrypted == null) {
+            fail("Message forged");
+        }
+    }
+
+    @SmallTest
+    public void testCryptoAuth() {
+        byte[] message = "hello!".getBytes();
+        byte[] key = new byte[CryptoAuth.CRYPTO_AUTH_KEYBYTES];
+
+        RandomBytes.fillBuffer(key);
+        byte[] mac = CryptoAuth.create(message, key);
+        if (mac == null) {
+            fail("Could not create MAC.");
+        }
+
+        if (!CryptoAuth.verify(mac, message, key)) {
+            fail("Could not verify valid MAC.");
+        }
+
+        if (CryptoAuth.verify(mac, "hell0!".getBytes(), key)) {
+            fail("verified wrong message!");
         }
     }
 }

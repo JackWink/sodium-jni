@@ -11,19 +11,35 @@ public class CryptoSecretBox {
     public final static int CRYPTO_SECRETBOX_MACBYTES = SodiumConstants.CRYPTO_SECRETBOX_MACBYTES;
     public final static int CRYPTO_SECRETBOX_NONCEBYTES = SodiumConstants.CRYPTO_SECRETBOX_NONCEBYTES;
 
-    public static int easy(byte[] c, byte[] m, byte[] n, byte[] k) {
-        return Sodium.crypto_secretbox_easy(c, m, m.length, n, k);
+    public static byte[] create_easy(byte[] message, byte[] nonce, byte[] key) {
+        byte[] ciphertext = new byte[CRYPTO_SECRETBOX_MACBYTES + message.length];
+        if (Sodium.crypto_secretbox_easy(ciphertext, message, message.length, nonce, key) != 0) {
+            return null;
+        }
+        return ciphertext;
     }
 
-    public static int open_easy(byte[] m, byte[] c, byte[] n, byte[] k) {
-        return Sodium.crypto_secretbox_open_easy(m, c, c.length, n, k);
+    public static byte[] open_easy(byte[] ciphertext, byte[] nonce, byte[] key) {
+        byte[] message = new byte[ciphertext.length - CRYPTO_SECRETBOX_MACBYTES];
+        if (Sodium.crypto_secretbox_open_easy(message, ciphertext, ciphertext.length, nonce, key) != 0) {
+            return null;
+        }
+        return message;
     }
 
-    public static int detached(byte[] c, byte[] mac, byte[] m, byte[] n, byte[] k) {
-        return Sodium.crypto_secretbox_detached(c, mac, m, m.length, n, k);
+    public static byte[] create_detached(byte[] mac, byte[] message, byte[] nonce, byte[] key) {
+        byte[] ciphertext = new byte[message.length];
+        if (Sodium.crypto_secretbox_detached(ciphertext, mac, message, message.length, nonce, key) != 0) {
+            return null;
+        }
+        return ciphertext;
     }
 
-    public static int open_detached(byte[] m, byte[] c, byte[] mac, byte[] n, byte[] k) {
-        return Sodium.crypto_secretbox_open_detached(m, c, mac, c.length, n, k);
+    public static byte[] open_detached(byte[] ciphertext, byte[] mac, byte[] nonce, byte[] key) {
+        byte[] message = new byte[ciphertext.length];
+        if(Sodium.crypto_secretbox_open_detached(message, ciphertext, mac, ciphertext.length, nonce, key) != 0) {
+            return null;
+        }
+        return message;
     }
 }

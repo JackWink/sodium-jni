@@ -16,4 +16,6 @@ public interface SodiumConstants {
   public final static int CRYPTO_SECRETBOX_KEYBYTES = 32;
   public final static int CRYPTO_SECRETBOX_MACBYTES = 16;
   public final static int CRYPTO_SECRETBOX_NONCEBYTES = 24;
+  public final static int CRYPTO_AUTH_BYTES = 32;
+  public final static int CRYPTO_AUTH_KEYBYTES = 32;
 }
