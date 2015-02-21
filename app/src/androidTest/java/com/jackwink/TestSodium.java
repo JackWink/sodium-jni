@@ -57,11 +57,6 @@ public class TestSodium extends TestCase {
         if (NaCl.crypto_secretbox_open_easy(decrypted, ciphertext, nonce, key) != 0) {
             fail("Message forged");
         }
-
-        Log.i(TestSodium.TAG, "Enc: " + Arrays.toString(ciphertext));
-        Log.i(TestSodium.TAG, "Dec: " + Arrays.toString(decrypted));
-        Log.i(TestSodium.TAG, "Org: " + Arrays.toString(message));
-
     }
 
 
