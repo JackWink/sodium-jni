@@ -1,11 +1,10 @@
 package com.jackwink;
 
 import android.test.suitebuilder.annotation.SmallTest;
-import android.util.Log;
 
 import com.jackwink.libsodium.CryptoSecretBox;
 import com.jackwink.libsodium.CryptoSign;
-import com.jackwink.libsodium.NaCl;
+import com.jackwink.libsodium.RandomBytes;
 
 import junit.framework.TestCase;
 
@@ -49,9 +48,9 @@ public class TestSodium extends TestCase {
         byte[] key = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_KEYBYTES];
         byte[] ciphertext = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_MACBYTES + message.length];
 
-        NaCl.randombytes_buf(nonce);
-        NaCl.randombytes_buf(key);
-       CryptoSecretBox.easy(ciphertext, message, nonce, key);
+        RandomBytes.fillBuffer(nonce);
+        RandomBytes.fillBuffer(key);
+        CryptoSecretBox.easy(ciphertext, message, nonce, key);
 
         byte[] decrypted = new byte[ciphertext.length - CryptoSecretBox.CRYPTO_SECRETBOX_MACBYTES];
         if (CryptoSecretBox.open_easy(decrypted, ciphertext, nonce, key) != 0) {
