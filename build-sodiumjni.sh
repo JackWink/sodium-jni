@@ -74,6 +74,7 @@ mv $SODIUMJNI_HOME/libs $SODIUMJNI_SRC_ROOT/main/lib
 
 cd $SODIUMJNI_HOME
 ./gradlew build
+./gradlew connectedCheck 
 
 rm -rf $SODIUMJNI_HOME/build 
 rm -rf $SODIUMJNI_HOME/sodiumjni-androidlib

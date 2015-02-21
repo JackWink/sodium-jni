@@ -23,6 +23,11 @@ android {
                 srcDir 'src/main/lib'
             }
         }
+        androidTest {
+            java {
+                srcDir 'src/androidTest/java'    
+            }    
+        }
     }
 
     buildTypes {

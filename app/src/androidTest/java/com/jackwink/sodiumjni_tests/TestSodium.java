@@ -1,4 +1,4 @@
-package com.jackwink;
+package com.jackwink.sodiumjni_tests;
 
 import android.test.suitebuilder.annotation.SmallTest;
 
@@ -57,6 +57,4 @@ public class TestSodium extends TestCase {
             fail("Message forged");
         }
     }
-
-
 }
