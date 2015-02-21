@@ -3,10 +3,9 @@ package com.jackwink;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.util.Log;
 
+import com.jackwink.libsodium.CryptoSecretBox;
 import com.jackwink.libsodium.CryptoSign;
 import com.jackwink.libsodium.NaCl;
-import com.jackwink.libsodium.jni.Sodium;
-import com.jackwink.libsodium.jni.SodiumConstants;
 
 import junit.framework.TestCase;
 
@@ -22,8 +21,8 @@ public class TestSodium extends TestCase {
     public void testSignature() {
 
 
-        byte[] publicKey = new byte[SodiumConstants.CRYPTO_SIGN_PUBLICKEYBYTES];
-        byte[] secretKey = new byte[SodiumConstants.CRYPTO_SIGN_SECRETKEYBYTES];
+        byte[] publicKey = new byte[CryptoSign.CRYPTO_SIGN_PUBLICKEYBYTES];
+        byte[] secretKey = new byte[CryptoSign.CRYPTO_SIGN_SECRETKEYBYTES];
         CryptoSign.keypair(publicKey, secretKey);
 
         byte[] original = "test".getBytes();
@@ -46,16 +45,16 @@ public class TestSodium extends TestCase {
     @SmallTest
     public void testSecretBox() {
         byte[] message = "hello!".getBytes();
-        byte[] nonce = new byte[SodiumConstants.CRYPTO_SECRETBOX_NONCEBYTES];
-        byte[] key = new byte[SodiumConstants.CRYPTO_SECRETBOX_KEYBYTES];
-        byte[] ciphertext = new byte[SodiumConstants.CRYPTO_SECRETBOX_MACBYTES + message.length];
+        byte[] nonce = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_NONCEBYTES];
+        byte[] key = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_KEYBYTES];
+        byte[] ciphertext = new byte[CryptoSecretBox.CRYPTO_SECRETBOX_MACBYTES + message.length];
 
         NaCl.randombytes_buf(nonce);
         NaCl.randombytes_buf(key);
-        NaCl.crypto_secretbox_easy(ciphertext, message, nonce, key);
+       CryptoSecretBox.easy(ciphertext, message, nonce, key);
 
-        byte[] decrypted = new byte[ciphertext.length - SodiumConstants.CRYPTO_SECRETBOX_MACBYTES];
-        if (NaCl.crypto_secretbox_open_easy(decrypted, ciphertext, nonce, key) != 0) {
+        byte[] decrypted = new byte[ciphertext.length - CryptoSecretBox.CRYPTO_SECRETBOX_MACBYTES];
+        if (CryptoSecretBox.open_easy(decrypted, ciphertext, nonce, key) != 0) {
             fail("Message forged");
         }
     }

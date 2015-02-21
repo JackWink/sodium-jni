@@ -35,19 +35,4 @@ public class NaCl {
         return Sodium.randombytes_uniform(upper_bound);
     }
 
-    public static int crypto_secretbox_easy(byte[] c, byte[] m, byte[] n, byte[] k) {
-        return Sodium.crypto_secretbox_easy(c, m, m.length, n, k);
-    }
-
-    public static int crypto_secretbox_open_easy(byte[] m, byte[] c, byte[] n, byte[] k) {
-        return Sodium.crypto_secretbox_open_easy(m, c, c.length, n, k);
-    }
-
-    public static int crypto_secretbox_detached(byte[] c, byte[] mac, byte[] m, byte[] n, byte[] k) {
-        return Sodium.crypto_secretbox_detached(c, mac, m, m.length, n, k);
-    }
-
-    public static int crypto_secretbox_open_detached(byte[] m, byte[] c, byte[] mac, byte[] n, byte[] k) {
-        return Sodium.crypto_secretbox_open_detached(m, c, mac, c.length, n, k);
-    }
 }
