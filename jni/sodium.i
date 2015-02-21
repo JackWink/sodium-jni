@@ -37,6 +37,12 @@
  */
 %apply unsigned long { unsigned long long };
 
+/* Since this is only used by the randombytes (so far), then we're limited by an int (buf.length) */
+%apply int { size_t };
+
+%apply int { uint32_t };
+%apply unsigned char *BYTE { void * const };
+
 %javaconst(1);
 
 /* Start Sodium Definitions */
@@ -48,6 +54,15 @@
 int sodium_init(void);
 
 const char *sodium_version_string(void);
+
+
+/* randombytes.h */
+
+void randombytes_buf(void * const buf, const size_t size);
+
+uint32_t randombytes_random(void);
+
+uint32_t randombytes_uniform(const uint32_t upper_bound);
 
 /* crypto_sign.h & crypto_sign_*.h */
 

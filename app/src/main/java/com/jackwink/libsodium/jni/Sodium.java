@@ -17,6 +17,18 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.sodium_version_string();
   }
 
+  public static void randombytes_buf(byte[] buf, int size) {
+    SodiumJNI.randombytes_buf(buf, size);
+  }
+
+  public static int randombytes_random() {
+    return SodiumJNI.randombytes_random();
+  }
+
+  public static int randombytes_uniform(int upper_bound) {
+    return SodiumJNI.randombytes_uniform(upper_bound);
+  }
+
   public static int crypto_sign_keypair(byte[] pk, byte[] sk) {
     return SodiumJNI.crypto_sign_keypair(pk, sk);
   }

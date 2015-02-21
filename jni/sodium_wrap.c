@@ -218,6 +218,50 @@ SWIGEXPORT jstring JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_sodium_1ver
 }
 
 
+SWIGEXPORT void JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_randombytes_1buf(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jint jarg2) {
+  void *arg1 = (void *) (void *)0 ;
+  size_t arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  {
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
+  }
+  arg2 = (size_t)jarg2; 
+  randombytes_buf(arg1,arg2);
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
+  }
+  
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_randombytes_1random(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  uint32_t result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = randombytes_random();
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_randombytes_1uniform(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  jint jresult = 0 ;
+  uint32_t arg1 ;
+  uint32_t result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (uint32_t)jarg1; 
+  result = randombytes_uniform(arg1);
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
 SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1sign_1keypair(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jbyteArray jarg2) {
   jint jresult = 0 ;
   unsigned char *arg1 = (unsigned char *) 0 ;

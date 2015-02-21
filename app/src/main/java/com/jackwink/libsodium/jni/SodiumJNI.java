@@ -11,6 +11,9 @@ package com.jackwink.libsodium.jni;
 public class SodiumJNI {
   public final static native int sodium_init();
   public final static native String sodium_version_string();
+  public final static native void randombytes_buf(byte[] jarg1, int jarg2);
+  public final static native int randombytes_random();
+  public final static native int randombytes_uniform(int jarg1);
   public final static native int crypto_sign_keypair(byte[] jarg1, byte[] jarg2);
   public final static native int crypto_sign_seed_keypair(byte[] jarg1, byte[] jarg2, byte[] jarg3);
   public final static native int crypto_sign(byte[] jarg1, long jarg2, byte[] jarg3, long jarg4, byte[] jarg5);
