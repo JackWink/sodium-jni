@@ -39,6 +39,7 @@ public class SodiumJNI {
   public final static native int crypto_pwhash_scryptsalsa208sha256(byte[] jarg1, long jarg2, String jarg3, long jarg4, byte[] jarg5, long jarg6, int jarg7);
   public final static native int crypto_pwhash_scryptsalsa208sha256_str(byte[] jarg1, String jarg2, long jarg3, long jarg4, int jarg5);
   public final static native int crypto_pwhash_scryptsalsa208sha256_str_verify(byte[] jarg1, String jarg2, long jarg3);
+  public final static native int crypto_shorthash(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4);
 
         /* Load JNI library */
         static {

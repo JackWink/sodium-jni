@@ -129,4 +129,8 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.crypto_pwhash_scryptsalsa208sha256_str_verify(str, passwd, passwdlen);
   }
 
+  public static int crypto_shorthash(byte[] out, byte[] in, long inlen, byte[] k) {
+    return SodiumJNI.crypto_shorthash(out, in, inlen, k);
+  }
+
 }

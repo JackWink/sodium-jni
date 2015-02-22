@@ -232,6 +232,14 @@ int crypto_pwhash_scryptsalsa208sha256_str_verify(const char str[crypto_pwhash_s
                                                   const char * const passwd,
                                                   unsigned long long passwdlen);
 
+/* crypto_shorthash.h */
+
+#define CRYPTO_SHORTHASH_BYTES 8 
+#define CRYPTO_SHORTHASH_KEYBYTES 16 
+
+int crypto_shorthash(unsigned char *out, const unsigned char *in,
+                     unsigned long long inlen, const unsigned char *k);
+
 
 /* Static library loader */
 

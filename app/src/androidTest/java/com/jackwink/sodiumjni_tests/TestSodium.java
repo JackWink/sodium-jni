@@ -8,6 +8,7 @@ import com.jackwink.libsodium.CryptoAuth;
 import com.jackwink.libsodium.CryptoBox;
 import com.jackwink.libsodium.CryptoPasswordHash;
 import com.jackwink.libsodium.CryptoSecretBox;
+import com.jackwink.libsodium.CryptoShortHash;
 import com.jackwink.libsodium.CryptoSign;
 import com.jackwink.libsodium.RandomBytes;
 
@@ -203,14 +204,24 @@ public class TestSodium extends TestCase {
         byte[] salt = new byte[CryptoPasswordHash.CRYPTO_PWHASH_SALTBYTES];
         RandomBytes.fillBuffer(salt);
 
-
         byte[] key = CryptoPasswordHash.deriveKey(password, salt,
                                                   CryptoPasswordHash.CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
                                                   CryptoPasswordHash.CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE);
 
-
         if (key == null) {
             fail("failed to derive key");
+        }
+    }
+
+    @SmallTest
+    public void testCryptoShortHash(){
+        String message = "12345";
+        byte[] key = new byte[CryptoShortHash.CRYPTO_SHORTHASH_KEYBYTES];
+        RandomBytes.fillBuffer(key);
+
+        byte[] hash = CryptoShortHash.hash(message.getBytes(), key);
+        if (hash == null) {
+            fail("Couldn't generate short hash for message");
         }
     }
 }
