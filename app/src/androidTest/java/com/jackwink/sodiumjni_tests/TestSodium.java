@@ -6,6 +6,7 @@ import android.util.Log;
 import com.jackwink.libsodium.CryptoAEAD;
 import com.jackwink.libsodium.CryptoAuth;
 import com.jackwink.libsodium.CryptoBox;
+import com.jackwink.libsodium.CryptoPasswordHash;
 import com.jackwink.libsodium.CryptoSecretBox;
 import com.jackwink.libsodium.CryptoSign;
 import com.jackwink.libsodium.RandomBytes;
@@ -176,6 +177,40 @@ public class TestSodium extends TestCase {
         byte[] decrypted = CryptoAEAD.crypto_aead_chacha20poly1305_decrypt(ciphertext, additionalData, nonce, key);
         if (decrypted == null) {
             fail("Could not decrypt CryptoAEAD ciphertext!");
+        }
+    }
+
+    @SmallTest
+    public void testCryptoPasswordHash() {
+        String password = "12345";
+
+        String hash = CryptoPasswordHash.hash(password, CryptoPasswordHash.CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
+                                                        CryptoPasswordHash.CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE);
+
+
+        if (hash == null) {
+            fail("Could not generate pwhash");
+        }
+
+        if(!CryptoPasswordHash.verify(hash, password)) {
+            fail("hash doesn't verify '" + hash + "' to '" + password + "'");
+        }
+    }
+
+    @SmallTest
+    public void testCryptoPasswordHashDerivedKey() {
+        String password = "12345";
+        byte[] salt = new byte[CryptoPasswordHash.CRYPTO_PWHASH_SALTBYTES];
+        RandomBytes.fillBuffer(salt);
+
+
+        byte[] key = CryptoPasswordHash.deriveKey(password, salt,
+                                                  CryptoPasswordHash.CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
+                                                  CryptoPasswordHash.CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE);
+
+
+        if (key == null) {
+            fail("failed to derive key");
         }
     }
 }

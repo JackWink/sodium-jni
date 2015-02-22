@@ -43,6 +43,10 @@
 %apply int { uint32_t };
 %apply unsigned char *BYTE { void * const };
 
+/* Following needed to make sure we don't use String type for hashes */
+%apply unsigned char *BYTE { const char str[crypto_pwhash_scryptsalsa208sha256_STRBYTES] };
+%apply unsigned char *BYTE { char out[crypto_pwhash_scryptsalsa208sha256_STRBYTES] };
+
 %javaconst(1);
 
 /* Start Sodium Definitions */
@@ -197,6 +201,37 @@ int crypto_aead_chacha20poly1305_decrypt(unsigned char *m,
                                          unsigned long long adlen,
                                          const unsigned char *npub,
                                          const unsigned char *k);
+
+/* crypto_pwhash_*.h */
+
+#define CRYPTO_PWHASH_SALTBYTES 32
+#define CRYPTO_PWHASH_HASHBYTES 102 
+#define CRYPTO_PWHASH_KEY_BYTES 32
+
+#define CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE 524288
+#define CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE 16777216
+
+#define CRYPTO_PWHASH_OPSLIMIT_SENSITIVE 33554432
+#define CRYPTO_PWHASH_MEMLIMIT_SENSITIVE 1073741824
+
+int crypto_pwhash_scryptsalsa208sha256(unsigned char * const out,
+                                       unsigned long long outlen,
+                                       const char * const passwd,
+                                       unsigned long long passwdlen,
+                                       const unsigned char * const salt,
+                                       unsigned long long opslimit,
+                                       size_t memlimit);
+
+int crypto_pwhash_scryptsalsa208sha256_str(char out[crypto_pwhash_scryptsalsa208sha256_STRBYTES],
+                                           const char * const passwd,
+                                           unsigned long long passwdlen,
+                                           unsigned long long opslimit,
+                                           size_t memlimit);
+
+int crypto_pwhash_scryptsalsa208sha256_str_verify(const char str[crypto_pwhash_scryptsalsa208sha256_STRBYTES],
+                                                  const char * const passwd,
+                                                  unsigned long long passwdlen);
+
 
 /* Static library loader */
 

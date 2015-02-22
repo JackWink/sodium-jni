@@ -117,4 +117,16 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.crypto_aead_chacha20poly1305_decrypt(m, SWIGTYPE_p_unsigned_long_long.getCPtr(mlen), nsec, c, clen, ad, adlen, npub, k);
   }
 
+  public static int crypto_pwhash_scryptsalsa208sha256(byte[] out, long outlen, String passwd, long passwdlen, byte[] salt, long opslimit, int memlimit) {
+    return SodiumJNI.crypto_pwhash_scryptsalsa208sha256(out, outlen, passwd, passwdlen, salt, opslimit, memlimit);
+  }
+
+  public static int crypto_pwhash_scryptsalsa208sha256_str(byte[] out, String passwd, long passwdlen, long opslimit, int memlimit) {
+    return SodiumJNI.crypto_pwhash_scryptsalsa208sha256_str(out, passwd, passwdlen, opslimit, memlimit);
+  }
+
+  public static int crypto_pwhash_scryptsalsa208sha256_str_verify(byte[] str, String passwd, long passwdlen) {
+    return SodiumJNI.crypto_pwhash_scryptsalsa208sha256_str_verify(str, passwd, passwdlen);
+  }
+
 }

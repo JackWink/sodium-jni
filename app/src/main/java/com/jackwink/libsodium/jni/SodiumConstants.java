@@ -26,4 +26,11 @@ public interface SodiumConstants {
   public final static int CRYPTO_AED_CHACHA20POLY1305_KEYBYTES = 32;
   public final static int CRYPTO_AED_CHACHA20POLY1305_NONCEBYTES = 32;
   public final static int CRYPTO_AED_CHACHA20POLY1305_MACBYTES = 16;
+  public final static int CRYPTO_PWHASH_SALTBYTES = 32;
+  public final static int CRYPTO_PWHASH_HASHBYTES = 102;
+  public final static int CRYPTO_PWHASH_KEY_BYTES = 32;
+  public final static int CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE = 524288;
+  public final static int CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE = 16777216;
+  public final static int CRYPTO_PWHASH_OPSLIMIT_SENSITIVE = 33554432;
+  public final static int CRYPTO_PWHASH_MEMLIMIT_SENSITIVE = 1073741824;
 }

@@ -1244,6 +1244,111 @@ SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1aead_1
 }
 
 
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1pwhash_1scryptsalsa208sha256(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg2, jstring jarg3, jlong jarg4, jbyteArray jarg5, jlong jarg6, jint jarg7) {
+  jint jresult = 0 ;
+  unsigned char *arg1 = (unsigned char *) (unsigned char *)0 ;
+  unsigned long long arg2 ;
+  char *arg3 = (char *) (char *)0 ;
+  unsigned long long arg4 ;
+  unsigned char *arg5 = (unsigned char *) (unsigned char *)0 ;
+  unsigned long long arg6 ;
+  size_t arg7 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  {
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
+  }
+  arg2 = (unsigned long long)jarg2; 
+  arg3 = 0;
+  if (jarg3) {
+    arg3 = (char *)(*jenv)->GetStringUTFChars(jenv, jarg3, 0);
+    if (!arg3) return 0;
+  }
+  arg4 = (unsigned long long)jarg4; 
+  {
+    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0); 
+  }
+  arg6 = (unsigned long long)jarg6; 
+  arg7 = (size_t)jarg7; 
+  result = (int)crypto_pwhash_scryptsalsa208sha256(arg1,arg2,(char const *)arg3,arg4,(unsigned char const *)arg5,arg6,arg7);
+  jresult = (jint)result; 
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0); 
+  }
+  
+  if (arg3) (*jenv)->ReleaseStringUTFChars(jenv, jarg3, (const char *)arg3);
+  
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1pwhash_1scryptsalsa208sha256_1str(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jstring jarg2, jlong jarg3, jlong jarg4, jint jarg5) {
+  jint jresult = 0 ;
+  char *arg1 ;
+  char *arg2 = (char *) (char *)0 ;
+  unsigned long long arg3 ;
+  unsigned long long arg4 ;
+  size_t arg5 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  {
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
+  }
+  arg2 = 0;
+  if (jarg2) {
+    arg2 = (char *)(*jenv)->GetStringUTFChars(jenv, jarg2, 0);
+    if (!arg2) return 0;
+  }
+  arg3 = (unsigned long long)jarg3; 
+  arg4 = (unsigned long long)jarg4; 
+  arg5 = (size_t)jarg5; 
+  result = (int)crypto_pwhash_scryptsalsa208sha256_str(arg1,(char const *)arg2,arg3,arg4,arg5);
+  jresult = (jint)result; 
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
+  }
+  
+  if (arg2) (*jenv)->ReleaseStringUTFChars(jenv, jarg2, (const char *)arg2);
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1pwhash_1scryptsalsa208sha256_1str_1verify(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jstring jarg2, jlong jarg3) {
+  jint jresult = 0 ;
+  char *arg1 ;
+  char *arg2 = (char *) (char *)0 ;
+  unsigned long long arg3 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  {
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
+  }
+  arg2 = 0;
+  if (jarg2) {
+    arg2 = (char *)(*jenv)->GetStringUTFChars(jenv, jarg2, 0);
+    if (!arg2) return 0;
+  }
+  arg3 = (unsigned long long)jarg3; 
+  result = (int)crypto_pwhash_scryptsalsa208sha256_str_verify((char const (*))arg1,(char const *)arg2,arg3);
+  jresult = (jint)result; 
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
+  }
+  
+  if (arg2) (*jenv)->ReleaseStringUTFChars(jenv, jarg2, (const char *)arg2);
+  return jresult;
+}
+
+
 #ifdef __cplusplus
 }
 #endif
