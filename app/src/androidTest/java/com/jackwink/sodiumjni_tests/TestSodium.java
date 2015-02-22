@@ -6,6 +6,7 @@ import android.util.Log;
 import com.jackwink.libsodium.CryptoAEAD;
 import com.jackwink.libsodium.CryptoAuth;
 import com.jackwink.libsodium.CryptoBox;
+import com.jackwink.libsodium.CryptoGenericHash;
 import com.jackwink.libsodium.CryptoPasswordHash;
 import com.jackwink.libsodium.CryptoSecretBox;
 import com.jackwink.libsodium.CryptoShortHash;
@@ -222,6 +223,18 @@ public class TestSodium extends TestCase {
         byte[] hash = CryptoShortHash.hash(message.getBytes(), key);
         if (hash == null) {
             fail("Couldn't generate short hash for message");
+        }
+    }
+
+    @SmallTest
+    public void testCrytoGenericHash() {
+        String message = "12345";
+        byte[] key = new byte[CryptoGenericHash.CRYPTO_GENERICHASH_KEYBYTES];
+        RandomBytes.fillBuffer(key);
+
+        byte[] hash = CryptoGenericHash.hash(message.getBytes(), key);
+        if (hash == null) {
+            fail("Could not generate generic hash for message");
         }
     }
 }

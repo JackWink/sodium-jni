@@ -1387,6 +1387,48 @@ SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1shorth
 }
 
 
+SWIGEXPORT jint JNICALL Java_com_jackwink_libsodium_jni_SodiumJNI_crypto_1generichash(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jint jarg2, jbyteArray jarg3, jlong jarg4, jbyteArray jarg5, jint jarg6) {
+  jint jresult = 0 ;
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  size_t arg2 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  unsigned long long arg4 ;
+  unsigned char *arg5 = (unsigned char *) 0 ;
+  size_t arg6 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  {
+    arg1 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg1, 0); 
+  }
+  arg2 = (size_t)jarg2; 
+  {
+    arg3 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg3, 0); 
+  }
+  arg4 = (unsigned long long)jarg4; 
+  {
+    arg5 = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, jarg5, 0); 
+  }
+  arg6 = (size_t)jarg6; 
+  result = (int)crypto_generichash(arg1,arg2,(unsigned char const *)arg3,arg4,(unsigned char const *)arg5,arg6);
+  jresult = (jint)result; 
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg1, (jbyte *) arg1, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg3, (jbyte *) arg3, 0); 
+  }
+  {
+    (*jenv)->ReleaseByteArrayElements(jenv, jarg5, (jbyte *) arg5, 0); 
+  }
+  
+  
+  
+  return jresult;
+}
+
+
 #ifdef __cplusplus
 }
 #endif

@@ -35,4 +35,6 @@ public interface SodiumConstants {
   public final static int CRYPTO_PWHASH_MEMLIMIT_SENSITIVE = 1073741824;
   public final static int CRYPTO_SHORTHASH_BYTES = 8;
   public final static int CRYPTO_SHORTHASH_KEYBYTES = 16;
+  public final static int CRYPTO_GENERICHASH_BYTES = 32;
+  public final static int CRYPTO_GENERICHASH_KEYBYTES = 32;
 }

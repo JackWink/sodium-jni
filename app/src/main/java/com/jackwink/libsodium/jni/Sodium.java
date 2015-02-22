@@ -133,4 +133,8 @@ public class Sodium implements SodiumConstants {
     return SodiumJNI.crypto_shorthash(out, in, inlen, k);
   }
 
+  public static int crypto_generichash(byte[] out, int outlen, byte[] in, long inlen, byte[] key, int keylen) {
+    return SodiumJNI.crypto_generichash(out, outlen, in, inlen, key, keylen);
+  }
+
 }

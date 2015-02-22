@@ -241,6 +241,31 @@ int crypto_shorthash(unsigned char *out, const unsigned char *in,
                      unsigned long long inlen, const unsigned char *k);
 
 
+/* crypto_generichash.h */
+
+#define CRYPTO_GENERICHASH_BYTES 32
+#define CRYPTO_GENERICHASH_KEYBYTES 32
+
+int crypto_generichash(unsigned char *out, size_t outlen,
+                       const unsigned char *in, unsigned long long inlen,
+                       const unsigned char *key, size_t keylen);
+
+
+/* TODO: Need to figure out how to represent crypto_generichash_state with SWIG
+
+int crypto_generichash_init(crypto_generichash_state *state,
+                            const unsigned char *key,
+                            const size_t keylen, const size_t outlen);
+
+int crypto_generichash_update(crypto_generichash_state *state,
+                              const unsigned char *in,
+                              unsigned long long inlen);
+
+int crypto_generichash_final(crypto_generichash_state *state,
+                             unsigned char *out, const size_t outlen);
+
+*/
+
 /* Static library loader */
 
 %pragma(java) jniclasscode = %{
