@@ -11,11 +11,13 @@ A minimal JNI wrapper over [libsodium](https://github.com/jedisct1/libsodium). T
 
 ## What's the difference?
 
-Kalium is a very sensible wrapper over libsodium, but has a dependency on `jnr-ffi`.
+Kalium is a very sensible Java wrapper over libsodium that depends on `jnr-ffi`. Kalium takes an OOP approach 
+whereas Sodium-JNI provides a completely static API, and attempts to use Java primatives over library 
+defined classes.
 
-Kalium-JNI mimics the Kalium API, but wraps libsodium using SWIG and the JNI. However, it doesn't seem 
-to export and call `sodium_init` which makes me wary. Sodium-JNI started as a fork, but has diverged
-significantly in both the build process and wrapper API.
+Kalium-JNI mimics the Kalium API, but wraps libsodium using SWIG and the JNI. Sodium-JNI exports more 
+functions (`sodium_init`, etc.) and doesn't attempt to provide an OOP wrapper. Sodium-JNI started as a fork
+of Kalium-JNI, but has diverged significantly in both the build process and wrapper API.
 
 ## Building Requirements
 
