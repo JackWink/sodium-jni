@@ -92,6 +92,13 @@ int crypto_sign_detached(unsigned char *sig, unsigned long long *slen,
                          const unsigned char *m, unsigned long long mlen,
                          const unsigned char *sk);
 
+
+int crypto_sign_ed25519_sk_to_curve25519(unsigned char *curve25519_sk,
+                                         const unsigned char *ed25519_sk);
+
+int crypto_sign_ed25519_pk_to_curve25519(unsigned char *curve25519_pk,
+                                         const unsigned char *ed25519_pk);
+
 int crypto_sign_verify_detached(const unsigned char *sig,
                                 const unsigned char *m,
                                 unsigned long long mlen,
@@ -265,6 +272,9 @@ int crypto_generichash_final(crypto_generichash_state *state,
                              unsigned char *out, const size_t outlen);
 
 */
+
+
+/* */
 
 /* Static library loader */
 

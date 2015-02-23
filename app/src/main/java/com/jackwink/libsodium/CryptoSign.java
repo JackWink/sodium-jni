@@ -2,6 +2,7 @@ package com.jackwink.libsodium;
 
 import com.jackwink.libsodium.jni.Sodium;
 import com.jackwink.libsodium.jni.SodiumConstants;
+import com.jackwink.libsodium.jni.SodiumJNI;
 
 /**
  * Created by jackwink on 2/21/15.
@@ -63,5 +64,21 @@ public class CryptoSign {
             return null;
         }
         return publicKey;
+    }
+
+    public static byte[] ed25519_secretkey_to_curve25519(byte[] ed25519_sk) {
+        byte[] curve25519_secretkey = new byte[SodiumConstants.CRYPTO_BOX_SECRETKEYBYTES];
+        if (Sodium.crypto_sign_ed25519_sk_to_curve25519(curve25519_secretkey, ed25519_sk) != 0) {
+            return null;
+        }
+        return curve25519_secretkey;
+    }
+
+    public static byte[] ed25519_publickey_to_curve25519(byte[] ed25519_pk) {
+        byte[] curve25519_pk = new byte[SodiumConstants.CRYPTO_SIGN_PUBLICKEYBYTES];
+        if (Sodium.crypto_sign_ed25519_pk_to_curve25519(curve25519_pk, ed25519_pk) != 0) {
+            return null;
+        }
+        return curve25519_pk;
     }
 }

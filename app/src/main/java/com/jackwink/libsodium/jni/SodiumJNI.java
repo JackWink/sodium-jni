@@ -19,6 +19,8 @@ public class SodiumJNI {
   public final static native int crypto_sign(byte[] jarg1, long jarg2, byte[] jarg3, long jarg4, byte[] jarg5);
   public final static native int crypto_sign_open(byte[] jarg1, long jarg2, byte[] jarg3, long jarg4, byte[] jarg5);
   public final static native int crypto_sign_detached(byte[] jarg1, long jarg2, byte[] jarg3, long jarg4, byte[] jarg5);
+  public final static native int crypto_sign_ed25519_sk_to_curve25519(byte[] jarg1, byte[] jarg2);
+  public final static native int crypto_sign_ed25519_pk_to_curve25519(byte[] jarg1, byte[] jarg2);
   public final static native int crypto_sign_verify_detached(byte[] jarg1, byte[] jarg2, long jarg3, byte[] jarg4);
   public final static native int crypto_sign_ed25519_sk_to_seed(byte[] jarg1, byte[] jarg2);
   public final static native int crypto_sign_ed25519_sk_to_pk(byte[] jarg1, byte[] jarg2);

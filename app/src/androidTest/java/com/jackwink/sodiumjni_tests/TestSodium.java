@@ -237,4 +237,47 @@ public class TestSodium extends TestCase {
             fail("Could not generate generic hash for message");
         }
     }
+
+    @SmallTest
+    public void testCrytoSignKeyConversion() {
+        byte[] ed25519PublicKeyOne = new byte[CryptoSign.CRYPTO_SIGN_PUBLICKEYBYTES];
+        byte[] ed25519SecretKeyOne = new byte[CryptoSign.CRYPTO_SIGN_SECRETKEYBYTES];
+        CryptoSign.keypair(ed25519PublicKeyOne, ed25519SecretKeyOne);
+
+        byte[] ed25519PublicKeyTwo = new byte[CryptoSign.CRYPTO_SIGN_PUBLICKEYBYTES];
+        byte[] ed25519SecretKeyTwo = new byte[CryptoSign.CRYPTO_SIGN_SECRETKEYBYTES];
+        CryptoSign.keypair(ed25519PublicKeyTwo, ed25519SecretKeyTwo);
+
+        byte[] curve25519PublicKeyTwo = CryptoSign.ed25519_publickey_to_curve25519(ed25519PublicKeyTwo);
+        byte[] curve25519SecretKeyTwo = CryptoSign.ed25519_secretkey_to_curve25519(ed25519SecretKeyTwo);
+        byte[] curve25519PublicKeyOne = CryptoSign.ed25519_publickey_to_curve25519(ed25519PublicKeyOne);
+        byte[] curve25519SecretKeyOne = CryptoSign.ed25519_secretkey_to_curve25519(ed25519SecretKeyOne);
+        if (curve25519PublicKeyTwo == null || curve25519PublicKeyOne == null ||
+            curve25519SecretKeyOne == null || curve25519SecretKeyTwo == null) {
+            fail("Could not convert a key!");
+        }
+
+        byte[] message = "hello!".getBytes();
+        byte[] mac = new byte[CryptoBox.CRYPTO_BOX_MACBYTES];
+        byte[] nonce = new byte[CryptoBox.CRYPTO_BOX_NONCEBYTES];
+        RandomBytes.fillBuffer(nonce);
+
+        byte[] ciphertext = CryptoBox.create_detached(mac, message, nonce, curve25519PublicKeyOne, curve25519SecretKeyTwo);
+        if (ciphertext == null) {
+            fail("Could not create box for converted keys!");
+        }
+
+        byte[] decrypted = CryptoBox.open_detached(ciphertext, mac, nonce, curve25519PublicKeyTwo, curve25519SecretKeyOne);
+        if (decrypted == null) {
+            fail("Could not open box for converted keys!");
+        }
+
+        byte[] original = "test".getBytes();
+        byte[] testSig = CryptoSign.sign(original, ed25519SecretKeyOne);
+        byte[] messageTwo = CryptoSign.open(testSig, ed25519PublicKeyOne);
+
+        if (!Arrays.equals(original, messageTwo)) {
+            fail("Message not verified.");
+        }
+    }
 }
