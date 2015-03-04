@@ -74,7 +74,11 @@ mv $SODIUMJNI_HOME/libs $SODIUMJNI_SRC_ROOT/main/lib
 
 cd $SODIUMJNI_HOME
 ./gradlew build
+
+SKIP_TEST="skip-test"
+if [ "$1" != "$SKIP_TEST" ]; then
 ./gradlew connectedCheck 
+fi
 
 rm -rf $SODIUMJNI_HOME/build 
 rm -rf $SODIUMJNI_HOME/sodiumjni-androidlib
