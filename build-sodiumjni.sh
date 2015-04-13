@@ -7,7 +7,8 @@
 #
 #   2. Run swig to create sodium_wrap.c 
 #
-#   3. Run ndk-build to build our sodiumjni shared libraries
+#   3. Run ndk-build to build our sodiumjni shared libraries for android
+#      and use GCC to build for osx/linux
 #
 #   4. Run gradle build script
 
@@ -61,6 +62,22 @@ swig -java -package $SODIUMJNI_PACKAGE -outdir $SODIUMJNI_JAVA_PACKAGE_ROOT sodi
 #
 
 cd $LIBSODIUM_JNI_HOME
+
+# For linux, we want to create a shared library for running tests on the local jvm
+jnilib=libsodiumjni.so
+destlib=/usr/lib
+if uname -a | grep -q -i darwin; then
+    # For OSX java requires some different lib locations/names 
+    jnilib=libsodiumjni.jnilib
+    destlib=/usr/lib/java
+fi
+
+# Local JVM build (OSX/Linux)
+gcc -I${JAVA_HOME}/include -I${JAVA_HOME}/include/linux sodium_wrap.c -shared -fPIC -L/usr/lib -lsodium -o $jnilib
+sudo rm -f "$destlib/$jnilib" 
+sudo mv $jnilib $destlib
+
+# Android build
 ndk-build
 
 # do some cleanup
