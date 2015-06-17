@@ -23,6 +23,8 @@ else ifeq ($(TARGET_ARCH_ABI),x86)
 	ARCH_PREFIX := i686
 else ifeq ($(TARGET_ARCH_ABI),mips)
 	ARCH_PREFIX := mips32
+else ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
+	ARCH_PREFIX := armv8-a
 else
 	ARCH_PREFIX := $(TARGET_ARCH)
 endif

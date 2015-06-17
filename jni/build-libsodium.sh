@@ -13,12 +13,14 @@ LIBSODIUM_ARMV6=$SODIUM_HOME/libsodium-android-armv6
 LIBSODIUM_ARMV7A=$SODIUM_HOME/libsodium-android-armv7-a
 LIBSODIUM_I686=$SODIUM_HOME/libsodium-android-i686
 LIBSODIUM_MIPS32=$SODIUM_HOME/libsodium-android-mips32
+LIBSODIUM_ARMV8A=$SODIUM_HOME/libsodium-android-armv8-a
 
 if [ "$1" = "clean" ]; then
     rm -rf $LIBSODIUM_ARMV6
     rm -rf $LIBSODIUM_ARMV7A
     rm -rf $LIBSODIUM_I686
     rm -rf $LIBSODIUM_MIPS32
+    rm -rf $LIBSODIUM_ARMV8A
 fi
 
 # Run the android builds 
@@ -48,6 +50,13 @@ if [ ! -d $LIBSODIUM_I686 ]; then
     echo "build-libsodium: built x86!"
 else
     echo "build-libsodium: skipping x86, already built!"
+fi
+
+if [ ! -d $LIBSODIUM_ARMV8A ]; then
+    $SODIUM_HOME/dist-build/android-armv8-a.sh
+    echo "build-libsodium: built armv8-a!"
+else
+    echo "build-libsodium: skipping armv8-a, already built!"
 fi
 
 echo "libsodium built."
