@@ -28,6 +28,8 @@ of Kalium-JNI, but has diverged significantly in both the build process and wrap
 
 ## Building
 
+Make sure you clone this repo with the `--recursive` flag set, it depends on libsodium as a submodule at the moment.
+
 Run `build-sodiumjni.sh` and a folder `sodiumjni-androidlib` will be generated with the debug and release version of the `.aar` 
 
 The local `.aar` can be included in an [Android studio project](http://stackoverflow.com/questions/24506648/adding-local-aar-files-to-gradle-build-using-flatdirs-is-not-working?lq=1)
