@@ -1,13 +1,12 @@
-#Sodium-JNI [IN-PROGRESS]
+#Sodium-JNI [DEPRECATED]
 
 [![Build Status](https://travis-ci.org/JackWink/sodium-jni.svg?branch=master)](https://travis-ci.org/JackWink/sodium-jni)
 
-A minimal JNI wrapper over [libsodium](https://github.com/jedisct1/libsodium). This is in progress at the moment, see the repo issues.
+A minimal JNI wrapper over [libsodium](https://github.com/jedisct1/libsodium). This is now deprecated. Kalium-JNI (now called [libsodium-jni](https://github.com/joshjdevl/kalium-jni)) seems to have come up with a similar design to this repository with regards to function exports. Since libsodium-jni has both addressed my original complaints and is actively maintained (at least more than this repository), I would advise using it instead.
 
 ## Other Java Options For Libsodium
 
 - [Kalium](https://github.com/abstractj/kalium)
-- [Kalium-jni](https://github.com/joshjdevl/kalium-jni)
 
 ## What's the difference?
 
